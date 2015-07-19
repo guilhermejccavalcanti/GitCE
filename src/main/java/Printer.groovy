@@ -4,7 +4,6 @@ import java.util.ArrayList;
 class Printer {
 	
 	public void writeCSV(ArrayList<MergeCommit> listMC){
-		
 		def out = new File('commits.csv')
 		
 		// deleting old files if it exists
@@ -21,7 +20,5 @@ class Printer {
 			out.append row.join(',')
 			out.append '\n'
 		}
-		
 	}
-
 }

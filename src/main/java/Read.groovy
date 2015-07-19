@@ -9,7 +9,7 @@ class Read {
 
 	public Read(fileName){
 		this.listMergeCommit = new ArrayList<MergeCommit>()
-		this.listProject = new ArrayList<Project>()
+		this.listProject 	 = new ArrayList<Project>()
 		this.csvProjectsFile = fileName
 		this.readProjectsCSV()
 	}
@@ -20,7 +20,7 @@ class Read {
 
 	def readCommitsCSV() {
 		BufferedReader br = null
-		String line = ""
+		String line 	  = ""
 		String csvSplitBy = ","
 		try {
 			br = new BufferedReader(new FileReader(this.csvCommitsFile))
@@ -64,10 +64,10 @@ class Read {
 			while ((line = br.readLine()) != null) {
 				String[] info = line.split(csvSplitBy)
 
-				def project = new Project()
+				def project 	= new Project()
 				project.name 	= info[0]
-				project.url = info[1]
-				project.graph = info[2]
+				project.url 	= info[1]
+				project.graph 	= info[2]
 
 				this.listProject.add(project)
 

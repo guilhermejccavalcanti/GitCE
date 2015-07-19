@@ -6,7 +6,7 @@ class Project {
 	String name
 	String url
 	String graph
-	ArrayList<MergeCommit> listMergeCommit
+	LinkedList<MergeCommit> listMergeCommit
 	
 	def setMergeCommits(mergeCommits){
 		this.listMergeCommit = mergeCommits
