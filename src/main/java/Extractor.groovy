@@ -50,7 +50,7 @@ class Extractor {
 		this.project			= project
 		this.listMergeCommit 	= this.project.listMergeCommit
 		this.remoteUrl 			= this.project.url
-		this.projectsDirectory	= "E:/Mestrado/FPFNAnalysis/projects/"
+		this.projectsDirectory	= "C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/"
 		this.tempdir			= this.projectsDirectory + "temp/" +this.project.name+"/git"
 		this.repositoryDir		= this.projectsDirectory + this.project.name + "/git"
 		this.CONFLICTS 			= 0
@@ -60,12 +60,12 @@ class Extractor {
 
 	public Extractor(MergeCommit mergeCommit){
 		this.remoteUrl 			= mergeCommit.projectURL
-		this.projectsDirectory	= "E:/Mestrado/FPFNAnalysis/projects/"
+		this.projectsDirectory	= "C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/"
 		this.tempdir			= this.projectsDirectory + "temp/" + mergeCommit.projectName +"/git"
 		this.repositoryDir		= this.projectsDirectory + mergeCommit.projectName + "/git"
 		this.CONFLICTS 			= 0
 		this.ERROR				= 0
-		//this.setup()
+		this.setup()
 	}
 
 	def extractCommits(){

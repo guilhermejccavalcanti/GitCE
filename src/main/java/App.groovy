@@ -2,6 +2,8 @@ import java.util.ArrayList;
 
 import util.FPFNCandidates;
 import merger.FSTGenMerger;
+import merger.MergeResult;
+
 
 
 class App {
@@ -88,24 +90,37 @@ class App {
 	}
 
 	def static runFPFNAnalysis(ArrayList<Project> projects){
-		LinkedList<MergeCommit> horizontalExecutionMergeCommits = this.fillMergeCommitsListForHorizontalExecution(projects);
-		println 'Horizontal List'
-		for(MergeCommit m : horizontalExecutionMergeCommits){
-			println m.toString()
-		}
-		
-		for(MergeCommit m : horizontalExecutionMergeCommits){
+		LinkedList<MergeCommit> horizontalExecutionMergeCommits = fillMergeCommitsListForHorizontalExecution(projects)
+		for(int i=0; i<horizontalExecutionMergeCommits.size();i++){
+			MergeCommit m = horizontalExecutionMergeCommits.get(i);
+			println ('Analysing ' + ((i+1)+'/'+horizontalExecutionMergeCommits.size()) + ': ' +  m.sha)
+
 			Extractor ext = new Extractor(m)
 			ext.downloadMergeScenario(m)
 			if(m.revisionFile != null){
-				FSTGenMerger merger 	  = new FSTGenMerger();
-				FPFNCandidates candidates = merger.run(m.revisionFile);
-				//executa análise de ast em candidates
+				FSTGenMerger merger 	  = new FSTGenMerger()
+				
+				MergeResult mergeResult	  = new MergeResult()
+				mergeResult.projectName	  = m.projectName
+				mergeResult.revision	  = m.revisionFile
+								
+				FPFNCandidates candidates = merger.runMerger(mergeResult)
+
+				MethodReferencesFinderAST finder = new MethodReferencesFinderAST()
+				finder.run(mergeResult,candidates.renamingCandidates, candidates.importCandidates, candidates.duplicatedCandidates)
+
+				//TODO
+				printMergeResult(mergeResult)
+				
+				fillExecutionLog(m.sha)
+				String revisionFolderDir = (new File(m.revisionFile)).getParent()
+				(new AntBuilder()).delete(dir:revisionFolderDir,failonerror:false)
 			}
 		}
 	}
 
 	def private static LinkedList<MergeCommit> fillMergeCommitsListForHorizontalExecution(ArrayList<Project> projects){
+		ArrayList<String> alreadyExecutedSHAs = restoreExecutionLog();
 		LinkedList<MergeCommit> horizontalExecutionMergeCommits = new LinkedList<MergeCommit>()
 		int aux = projects.size()
 		int i 	= 0;
@@ -113,7 +128,9 @@ class App {
 			Project p = projects.get(i)
 			if(!p.listMergeCommit.isEmpty()){
 				MergeCommit mergeCommit = p.listMergeCommit.poll()
-				horizontalExecutionMergeCommits.add(mergeCommit)
+				if(!alreadyExecutedSHAs.contains(mergeCommit.sha)){
+					horizontalExecutionMergeCommits.add(mergeCommit)
+				}
 			}
 			if(p.listMergeCommit.isEmpty()){
 				projects.remove(i)
@@ -129,6 +146,27 @@ class App {
 			}
 		}
 		return horizontalExecutionMergeCommits
+	}
+
+	def private static fillExecutionLog(String lastMergeCommitSHA){
+		def out = new File('execution.log')
+		out.append lastMergeCommitSHA
+		out.append '\n'
+	}
+
+	def private static ArrayList<String> restoreExecutionLog(){
+		ArrayList<String> alreadyExecutedSHAs = new ArrayList<String>()
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("execution.log"))
+			String line  = ""
+			while ((line = br.readLine()) != null)
+				alreadyExecutedSHAs.add(line)
+		} catch (FileNotFoundException e) {}
+		return alreadyExecutedSHAs
+	}
+	
+	def private static printMergeResult(MergeResult mergeResult){
+		
 	}
 
 	public static void main (String[] args){

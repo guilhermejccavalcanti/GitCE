@@ -64,13 +64,13 @@ class GremlinQuery {
 	}
 
 	private String auxGetSha(String commit){
-		String delims = "[,]"
-		String[] tokens = commit.split(delims);
+		String a = commit.substring(1, commit.length() -1)
+		String delims = ","
+		String[] tokens = a.split(delims);
 
 		boolean foundSha = false
 		int counter = 0
 		String s =""
-
 		while((!foundSha) && (counter < tokens.length)){
 			s = tokens[counter]
 			if(s.contains(" hash:") && s.length() == 46){
@@ -79,13 +79,11 @@ class GremlinQuery {
 				counter++
 			}
 		}
-
 		String sha = ""
 		if(foundSha){
 			sha = s.substring(6)
 			println(sha)
 		}
-
 		return sha
 	}
 
