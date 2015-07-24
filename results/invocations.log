@@ -1,0 +1,1494 @@
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\RealmListTest;addObjectsToRealm();RealmListTest.java => public void testAllObjects(){
+  addObjectsToRealm();
+  RealmList<AllColumns> allColumnsList=realm.allObjects(AllColumns.class);
+  assertEquals(10,allColumnsList.size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\RealmListTest;addObjectsToRealm();RealmListTest.java => public void testGetObjects(){
+  addObjectsToRealm();
+  RealmList<AllColumns> allColumnsList=realm.allObjects(AllColumns.class);
+  assertEquals(5,allColumnsList.get(5).getColumnLong());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\RealmListTest;addObjectsToRealm();RealmListTest.java => public void testGetFirstObject(){
+  addObjectsToRealm();
+  RealmList<AllColumns> allColumnsList=realm.allObjects(AllColumns.class);
+  assertEquals(0,allColumnsList.first().getColumnLong());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\RealmListTest;addObjectsToRealm();RealmListTest.java => public void testGetLastObject(){
+  addObjectsToRealm();
+  RealmList<AllColumns> allColumnsList=realm.allObjects(AllColumns.class);
+  assertEquals(9,allColumnsList.last().getColumnLong());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\RealmListTest;addObjectsToRealm();RealmListTest.java => public void testRemoveByIndex(){
+  addObjectsToRealm();
+  realm.beginWrite();
+  RealmList<AllColumns> allColumnsList=realm.allObjects(AllColumns.class);
+  try {
+    allColumnsList.remove(5);
+    fail("Should throw UnsupportedOperationException");
+    realm.commit();
+  }
+ catch (  UnsupportedOperationException e) {
+  }
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\RealmListTest;addObjectsToRealm();RealmListTest.java => public void testRemoveByObject(){
+  addObjectsToRealm();
+  realm.beginWrite();
+  RealmList<AllColumns> allColumnsList=realm.allObjects(AllColumns.class);
+  try {
+    allColumnsList.remove(allColumnsList.get(5));
+    fail("Should throw UnsupportedOperationException");
+    realm.commit();
+  }
+ catch (  UnsupportedOperationException e) {
+  }
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\RealmListTest;addObjectsToRealm();RealmListTest.java => public void testQuery(){
+  addObjectsToRealm();
+  RealmList all=realm.where(AllColumns.class).greaterThan("columnlong",0).findAll();
+  assertEquals(9,all.size());
+  RealmList result=all.where().lessThan("columnlong",5).findAll();
+  assertEquals(4,result.size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\RealmListTest;addObjectsToRealm();RealmListTest.java => public void testAllObjects(){
+  addObjectsToRealm();
+  RealmList<AllColumns> allColumnsList=realm.allObjects(AllColumns.class);
+  assertEquals(10,allColumnsList.size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\RealmListTest;addObjectsToRealm();RealmListTest.java => public void testGetObjects(){
+  addObjectsToRealm();
+  RealmList<AllColumns> allColumnsList=realm.allObjects(AllColumns.class);
+  assertEquals(5,allColumnsList.get(5).getColumnLong());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\RealmListTest;addObjectsToRealm();RealmListTest.java => public void testGetFirstObject(){
+  addObjectsToRealm();
+  RealmList<AllColumns> allColumnsList=realm.allObjects(AllColumns.class);
+  assertEquals(0,allColumnsList.first().getColumnLong());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\RealmListTest;addObjectsToRealm();RealmListTest.java => public void testGetLastObject(){
+  addObjectsToRealm();
+  RealmList<AllColumns> allColumnsList=realm.allObjects(AllColumns.class);
+  assertEquals(9,allColumnsList.last().getColumnLong());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\RealmListTest;addObjectsToRealm();RealmListTest.java => public void testRemoveByIndex(){
+  addObjectsToRealm();
+  realm.beginWrite();
+  RealmList<AllColumns> allColumnsList=realm.allObjects(AllColumns.class);
+  try {
+    allColumnsList.remove(5);
+    fail("Should throw UnsupportedOperationException");
+    realm.commit();
+  }
+ catch (  UnsupportedOperationException e) {
+  }
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\RealmListTest;addObjectsToRealm();RealmListTest.java => public void testRemoveByObject(){
+  addObjectsToRealm();
+  realm.beginWrite();
+  RealmList<AllColumns> allColumnsList=realm.allObjects(AllColumns.class);
+  try {
+    allColumnsList.remove(allColumnsList.get(5));
+    fail("Should throw UnsupportedOperationException");
+    realm.commit();
+  }
+ catch (  UnsupportedOperationException e) {
+  }
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\RealmListTest;addObjectsToRealm();RealmListTest.java => public void testQuery(){
+  addObjectsToRealm();
+  RealmList all=realm.where(AllColumns.class).greaterThan("columnlong",0).findAll();
+  assertEquals(9,all.size());
+  RealmList result=all.where().lessThan("columnlong",5).findAll();
+  assertEquals(4,result.size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnString(String);RealmListTest.java => public void addObjectsToRealm(){
+  realm.beginWrite();
+  for (int i=0; i < 10; i++) {
+    AllColumns allColumns=realm.create(AllColumns.class);
+    allColumns.setColumnString("dsfs");
+    allColumns.setColumnLong(i);
+    allColumns.setColumnFloat(1.1F);
+    allColumns.setColumnDouble(1.1);
+    allColumns.setColumnBoolean(true);
+    allColumns.setColumnDate(new Date());
+    allColumns.setColumnBinary(new byte[20]);
+    User user=realm.create(User.class);
+    user.setId(i);
+    user.setName("Test User");
+    user.setEmail("user@test.com");
+    allColumns.setColumnRealmObject(user);
+  }
+  realm.commit();
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnString(String);RealmListTest.java => public void testAddObject(){
+  realm.beginWrite();
+  AllColumns allColumns=realm.create(AllColumns.class);
+  allColumns.setColumnString("dsfs");
+  allColumns.setColumnLong(1);
+  allColumns.setColumnFloat(1.1F);
+  allColumns.setColumnDouble(1.1);
+  allColumns.setColumnBoolean(true);
+  allColumns.setColumnDate(new Date());
+  allColumns.setColumnBinary(new byte[20]);
+  RealmTableOrViewList<AllColumns> list=realm.allObjects(AllColumns.class);
+  assertEquals(1,list.size());
+  try {
+    realm.commit();
+  }
+ catch (  UnsupportedOperationException e) {
+    e.printStackTrace();
+  }
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnString(String);RealmTest.java => public void testCreate(){
+  realm.beginWrite();
+  AllColumns obj=realm.create(AllColumns.class);
+  obj.setColumnString("dsfs");
+  obj.setColumnLong(1);
+  obj.setColumnFloat(1.1F);
+  obj.setColumnDouble(1.1);
+  obj.setColumnBoolean(true);
+  obj.setColumnDate(new Date());
+  obj.setColumnBinary(new byte[20]);
+  realm.commit();
+  RealmList<AllColumns> result=realm.where(AllColumns.class).findAll();
+  assertEquals(1,result.size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnString(String);RealmTest.java => public void testAdd(){
+  realm.beginWrite();
+  AllColumns obj=realm.create(AllColumns.class);
+  obj.setColumnString("dsfs");
+  obj.setColumnLong(1);
+  obj.setColumnFloat(1.1F);
+  obj.setColumnDouble(1.1);
+  obj.setColumnBoolean(true);
+  obj.setColumnDate(new Date());
+  obj.setColumnBinary(new byte[20]);
+  User user=realm.create(User.class);
+  user.setName("Rasmus");
+  user.setEmail("ra@realm.io");
+  user.setId(0);
+  realm.commit();
+  assertEquals(1,realm.allObjects(AllColumns.class).size());
+  assertEquals(1,realm.allObjects(User.class).size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnString(String);RealmListTest.java => public void addObjectsToRealm(){
+  realm.beginWrite();
+  for (int i=0; i < 10; i++) {
+    AllColumns allColumns=new AllColumns();
+    allColumns.setColumnString("dsfs");
+    allColumns.setColumnLong(i);
+    allColumns.setColumnFloat(1.1F);
+    allColumns.setColumnDouble(1.1);
+    allColumns.setColumnBoolean(true);
+    allColumns.setColumnDate(new Date());
+    allColumns.setColumnBinary(new byte[20]);
+    User user=new User();
+    user.setId(i);
+    user.setName("Test User");
+    user.setEmail("user@test.com");
+    allColumns.setColumnRealmObject(user);
+    realm.add(allColumns);
+  }
+  realm.commit();
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnString(String);RealmListTest.java => public void testAddObject(){
+  AllColumns allColumns=new AllColumns();
+  allColumns.setColumnString("dsfs");
+  allColumns.setColumnLong(1);
+  allColumns.setColumnFloat(1.1F);
+  allColumns.setColumnDouble(1.1);
+  allColumns.setColumnBoolean(true);
+  allColumns.setColumnDate(new Date());
+  allColumns.setColumnBinary(new byte[20]);
+  realm.beginWrite();
+  RealmTableOrViewList<AllColumns> list=realm.allObjects(AllColumns.class);
+  assertEquals(0,list.size());
+  try {
+    list.add(allColumns);
+    fail("Should throw UnsupportedOperationException");
+    realm.commit();
+  }
+ catch (  UnsupportedOperationException e) {
+    e.printStackTrace();
+  }
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnString(String);RealmTest.java => public void testCreate(){
+  realm.beginWrite();
+  AllColumns obj=realm.create(AllColumns.class);
+  obj.setColumnString("dsfs");
+  obj.setColumnLong(1);
+  obj.setColumnFloat(1.1F);
+  obj.setColumnDouble(1.1);
+  obj.setColumnBoolean(true);
+  obj.setColumnDate(new Date());
+  obj.setColumnBinary(new byte[20]);
+  realm.commit();
+  RealmList<AllColumns> result=realm.where(AllColumns.class).findAll();
+  assertEquals(1,result.size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnString(String);RealmTest.java => public void testAdd(){
+  realm.beginWrite();
+  AllColumns obj=new AllColumns();
+  obj.setColumnString("dsfs");
+  obj.setColumnLong(1);
+  obj.setColumnFloat(1.1F);
+  obj.setColumnDouble(1.1);
+  obj.setColumnBoolean(true);
+  obj.setColumnDate(new Date());
+  obj.setColumnBinary(new byte[20]);
+  User user=new User();
+  user.setName("Rasmus");
+  user.setEmail("ra@realm.io");
+  user.setId(0);
+  obj.setColumnRealmObject(user);
+  realm.add(obj);
+  realm.commit();
+  assertEquals(1,realm.allObjects(AllColumns.class).size());
+  assertEquals(1,realm.allObjects(User.class).size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnString(String);RealmListTest.java => public void addObjectsToRealm(){
+  realm.beginWrite();
+  for (int i=0; i < 10; i++) {
+    AllColumns allColumns=realm.create(AllColumns.class);
+    allColumns.setColumnString("dsfs");
+    allColumns.setColumnLong(i);
+    allColumns.setColumnFloat(1.1F);
+    allColumns.setColumnDouble(1.1);
+    allColumns.setColumnBoolean(true);
+    allColumns.setColumnDate(new Date());
+    User user=realm.create(User.class);
+    user.setId(i);
+    user.setName("Test User");
+    user.setEmail("user@test.com");
+  }
+  realm.commit();
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnString(String);RealmListTest.java => public void testAddObject(){
+  realm.beginWrite();
+  AllColumns allColumns=realm.create(AllColumns.class);
+  allColumns.setColumnString("dsfs");
+  allColumns.setColumnLong(1);
+  allColumns.setColumnFloat(1.1F);
+  allColumns.setColumnDouble(1.1);
+  allColumns.setColumnBoolean(true);
+  allColumns.setColumnDate(new Date());
+  RealmTableOrViewList<AllColumns> list=realm.allObjects(AllColumns.class);
+  assertEquals(1,list.size());
+  try {
+    realm.commit();
+  }
+ catch (  UnsupportedOperationException e) {
+    e.printStackTrace();
+  }
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnString(String);RealmTest.java => public void testCreate(){
+  realm.beginWrite();
+  AllColumns obj=realm.create(AllColumns.class);
+  obj.setColumnString("dsfs");
+  obj.setColumnLong(1);
+  obj.setColumnFloat(1.1F);
+  obj.setColumnDouble(1.1);
+  obj.setColumnBoolean(true);
+  obj.setColumnDate(new Date());
+  realm.commit();
+  RealmList<AllColumns> result=realm.where(AllColumns.class).findAll();
+  assertEquals(1,result.size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnString(String);RealmTest.java => public void testAdd(){
+  realm.beginWrite();
+  AllColumns obj=realm.create(AllColumns.class);
+  obj.setColumnString("dsfs");
+  obj.setColumnLong(1);
+  obj.setColumnFloat(1.1F);
+  obj.setColumnDouble(1.1);
+  obj.setColumnBoolean(true);
+  obj.setColumnDate(new Date());
+  User user=realm.create(User.class);
+  user.setName("Rasmus");
+  user.setEmail("ra@realm.io");
+  user.setId(0);
+  realm.commit();
+  assertEquals(1,realm.allObjects(AllColumns.class).size());
+  assertEquals(1,realm.allObjects(User.class).size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnLong(long);RealmListTest.java => public void addObjectsToRealm(){
+  realm.beginWrite();
+  for (int i=0; i < 10; i++) {
+    AllColumns allColumns=realm.create(AllColumns.class);
+    allColumns.setColumnString("dsfs");
+    allColumns.setColumnLong(i);
+    allColumns.setColumnFloat(1.1F);
+    allColumns.setColumnDouble(1.1);
+    allColumns.setColumnBoolean(true);
+    allColumns.setColumnDate(new Date());
+    allColumns.setColumnBinary(new byte[20]);
+    User user=realm.create(User.class);
+    user.setId(i);
+    user.setName("Test User");
+    user.setEmail("user@test.com");
+    allColumns.setColumnRealmObject(user);
+  }
+  realm.commit();
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnLong(long);RealmListTest.java => public void testAddObject(){
+  realm.beginWrite();
+  AllColumns allColumns=realm.create(AllColumns.class);
+  allColumns.setColumnString("dsfs");
+  allColumns.setColumnLong(1);
+  allColumns.setColumnFloat(1.1F);
+  allColumns.setColumnDouble(1.1);
+  allColumns.setColumnBoolean(true);
+  allColumns.setColumnDate(new Date());
+  allColumns.setColumnBinary(new byte[20]);
+  RealmTableOrViewList<AllColumns> list=realm.allObjects(AllColumns.class);
+  assertEquals(1,list.size());
+  try {
+    realm.commit();
+  }
+ catch (  UnsupportedOperationException e) {
+    e.printStackTrace();
+  }
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnLong(long);RealmTest.java => public void testCreate(){
+  realm.beginWrite();
+  AllColumns obj=realm.create(AllColumns.class);
+  obj.setColumnString("dsfs");
+  obj.setColumnLong(1);
+  obj.setColumnFloat(1.1F);
+  obj.setColumnDouble(1.1);
+  obj.setColumnBoolean(true);
+  obj.setColumnDate(new Date());
+  obj.setColumnBinary(new byte[20]);
+  realm.commit();
+  RealmList<AllColumns> result=realm.where(AllColumns.class).findAll();
+  assertEquals(1,result.size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnLong(long);RealmTest.java => public void testAdd(){
+  realm.beginWrite();
+  AllColumns obj=realm.create(AllColumns.class);
+  obj.setColumnString("dsfs");
+  obj.setColumnLong(1);
+  obj.setColumnFloat(1.1F);
+  obj.setColumnDouble(1.1);
+  obj.setColumnBoolean(true);
+  obj.setColumnDate(new Date());
+  obj.setColumnBinary(new byte[20]);
+  User user=realm.create(User.class);
+  user.setName("Rasmus");
+  user.setEmail("ra@realm.io");
+  user.setId(0);
+  realm.commit();
+  assertEquals(1,realm.allObjects(AllColumns.class).size());
+  assertEquals(1,realm.allObjects(User.class).size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnLong(long);RealmListTest.java => public void addObjectsToRealm(){
+  realm.beginWrite();
+  for (int i=0; i < 10; i++) {
+    AllColumns allColumns=new AllColumns();
+    allColumns.setColumnString("dsfs");
+    allColumns.setColumnLong(i);
+    allColumns.setColumnFloat(1.1F);
+    allColumns.setColumnDouble(1.1);
+    allColumns.setColumnBoolean(true);
+    allColumns.setColumnDate(new Date());
+    allColumns.setColumnBinary(new byte[20]);
+    User user=new User();
+    user.setId(i);
+    user.setName("Test User");
+    user.setEmail("user@test.com");
+    allColumns.setColumnRealmObject(user);
+    realm.add(allColumns);
+  }
+  realm.commit();
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnLong(long);RealmListTest.java => public void testAddObject(){
+  AllColumns allColumns=new AllColumns();
+  allColumns.setColumnString("dsfs");
+  allColumns.setColumnLong(1);
+  allColumns.setColumnFloat(1.1F);
+  allColumns.setColumnDouble(1.1);
+  allColumns.setColumnBoolean(true);
+  allColumns.setColumnDate(new Date());
+  allColumns.setColumnBinary(new byte[20]);
+  realm.beginWrite();
+  RealmTableOrViewList<AllColumns> list=realm.allObjects(AllColumns.class);
+  assertEquals(0,list.size());
+  try {
+    list.add(allColumns);
+    fail("Should throw UnsupportedOperationException");
+    realm.commit();
+  }
+ catch (  UnsupportedOperationException e) {
+    e.printStackTrace();
+  }
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnLong(long);RealmTest.java => public void testCreate(){
+  realm.beginWrite();
+  AllColumns obj=realm.create(AllColumns.class);
+  obj.setColumnString("dsfs");
+  obj.setColumnLong(1);
+  obj.setColumnFloat(1.1F);
+  obj.setColumnDouble(1.1);
+  obj.setColumnBoolean(true);
+  obj.setColumnDate(new Date());
+  obj.setColumnBinary(new byte[20]);
+  realm.commit();
+  RealmList<AllColumns> result=realm.where(AllColumns.class).findAll();
+  assertEquals(1,result.size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnLong(long);RealmTest.java => public void testAdd(){
+  realm.beginWrite();
+  AllColumns obj=new AllColumns();
+  obj.setColumnString("dsfs");
+  obj.setColumnLong(1);
+  obj.setColumnFloat(1.1F);
+  obj.setColumnDouble(1.1);
+  obj.setColumnBoolean(true);
+  obj.setColumnDate(new Date());
+  obj.setColumnBinary(new byte[20]);
+  User user=new User();
+  user.setName("Rasmus");
+  user.setEmail("ra@realm.io");
+  user.setId(0);
+  obj.setColumnRealmObject(user);
+  realm.add(obj);
+  realm.commit();
+  assertEquals(1,realm.allObjects(AllColumns.class).size());
+  assertEquals(1,realm.allObjects(User.class).size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnLong(long);RealmListTest.java => public void addObjectsToRealm(){
+  realm.beginWrite();
+  for (int i=0; i < 10; i++) {
+    AllColumns allColumns=realm.create(AllColumns.class);
+    allColumns.setColumnString("dsfs");
+    allColumns.setColumnLong(i);
+    allColumns.setColumnFloat(1.1F);
+    allColumns.setColumnDouble(1.1);
+    allColumns.setColumnBoolean(true);
+    allColumns.setColumnDate(new Date());
+    User user=realm.create(User.class);
+    user.setId(i);
+    user.setName("Test User");
+    user.setEmail("user@test.com");
+  }
+  realm.commit();
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnLong(long);RealmListTest.java => public void testAddObject(){
+  realm.beginWrite();
+  AllColumns allColumns=realm.create(AllColumns.class);
+  allColumns.setColumnString("dsfs");
+  allColumns.setColumnLong(1);
+  allColumns.setColumnFloat(1.1F);
+  allColumns.setColumnDouble(1.1);
+  allColumns.setColumnBoolean(true);
+  allColumns.setColumnDate(new Date());
+  RealmTableOrViewList<AllColumns> list=realm.allObjects(AllColumns.class);
+  assertEquals(1,list.size());
+  try {
+    realm.commit();
+  }
+ catch (  UnsupportedOperationException e) {
+    e.printStackTrace();
+  }
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnLong(long);RealmTest.java => public void testCreate(){
+  realm.beginWrite();
+  AllColumns obj=realm.create(AllColumns.class);
+  obj.setColumnString("dsfs");
+  obj.setColumnLong(1);
+  obj.setColumnFloat(1.1F);
+  obj.setColumnDouble(1.1);
+  obj.setColumnBoolean(true);
+  obj.setColumnDate(new Date());
+  realm.commit();
+  RealmList<AllColumns> result=realm.where(AllColumns.class).findAll();
+  assertEquals(1,result.size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnLong(long);RealmTest.java => public void testAdd(){
+  realm.beginWrite();
+  AllColumns obj=realm.create(AllColumns.class);
+  obj.setColumnString("dsfs");
+  obj.setColumnLong(1);
+  obj.setColumnFloat(1.1F);
+  obj.setColumnDouble(1.1);
+  obj.setColumnBoolean(true);
+  obj.setColumnDate(new Date());
+  User user=realm.create(User.class);
+  user.setName("Rasmus");
+  user.setEmail("ra@realm.io");
+  user.setId(0);
+  realm.commit();
+  assertEquals(1,realm.allObjects(AllColumns.class).size());
+  assertEquals(1,realm.allObjects(User.class).size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnFloat(float);RealmListTest.java => public void addObjectsToRealm(){
+  realm.beginWrite();
+  for (int i=0; i < 10; i++) {
+    AllColumns allColumns=realm.create(AllColumns.class);
+    allColumns.setColumnString("dsfs");
+    allColumns.setColumnLong(i);
+    allColumns.setColumnFloat(1.1F);
+    allColumns.setColumnDouble(1.1);
+    allColumns.setColumnBoolean(true);
+    allColumns.setColumnDate(new Date());
+    allColumns.setColumnBinary(new byte[20]);
+    User user=realm.create(User.class);
+    user.setId(i);
+    user.setName("Test User");
+    user.setEmail("user@test.com");
+    allColumns.setColumnRealmObject(user);
+  }
+  realm.commit();
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnFloat(float);RealmListTest.java => public void testAddObject(){
+  realm.beginWrite();
+  AllColumns allColumns=realm.create(AllColumns.class);
+  allColumns.setColumnString("dsfs");
+  allColumns.setColumnLong(1);
+  allColumns.setColumnFloat(1.1F);
+  allColumns.setColumnDouble(1.1);
+  allColumns.setColumnBoolean(true);
+  allColumns.setColumnDate(new Date());
+  allColumns.setColumnBinary(new byte[20]);
+  RealmTableOrViewList<AllColumns> list=realm.allObjects(AllColumns.class);
+  assertEquals(1,list.size());
+  try {
+    realm.commit();
+  }
+ catch (  UnsupportedOperationException e) {
+    e.printStackTrace();
+  }
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnFloat(float);RealmTest.java => public void testCreate(){
+  realm.beginWrite();
+  AllColumns obj=realm.create(AllColumns.class);
+  obj.setColumnString("dsfs");
+  obj.setColumnLong(1);
+  obj.setColumnFloat(1.1F);
+  obj.setColumnDouble(1.1);
+  obj.setColumnBoolean(true);
+  obj.setColumnDate(new Date());
+  obj.setColumnBinary(new byte[20]);
+  realm.commit();
+  RealmList<AllColumns> result=realm.where(AllColumns.class).findAll();
+  assertEquals(1,result.size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnFloat(float);RealmTest.java => public void testAdd(){
+  realm.beginWrite();
+  AllColumns obj=realm.create(AllColumns.class);
+  obj.setColumnString("dsfs");
+  obj.setColumnLong(1);
+  obj.setColumnFloat(1.1F);
+  obj.setColumnDouble(1.1);
+  obj.setColumnBoolean(true);
+  obj.setColumnDate(new Date());
+  obj.setColumnBinary(new byte[20]);
+  User user=realm.create(User.class);
+  user.setName("Rasmus");
+  user.setEmail("ra@realm.io");
+  user.setId(0);
+  realm.commit();
+  assertEquals(1,realm.allObjects(AllColumns.class).size());
+  assertEquals(1,realm.allObjects(User.class).size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnFloat(float);RealmListTest.java => public void addObjectsToRealm(){
+  realm.beginWrite();
+  for (int i=0; i < 10; i++) {
+    AllColumns allColumns=new AllColumns();
+    allColumns.setColumnString("dsfs");
+    allColumns.setColumnLong(i);
+    allColumns.setColumnFloat(1.1F);
+    allColumns.setColumnDouble(1.1);
+    allColumns.setColumnBoolean(true);
+    allColumns.setColumnDate(new Date());
+    allColumns.setColumnBinary(new byte[20]);
+    User user=new User();
+    user.setId(i);
+    user.setName("Test User");
+    user.setEmail("user@test.com");
+    allColumns.setColumnRealmObject(user);
+    realm.add(allColumns);
+  }
+  realm.commit();
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnFloat(float);RealmListTest.java => public void testAddObject(){
+  AllColumns allColumns=new AllColumns();
+  allColumns.setColumnString("dsfs");
+  allColumns.setColumnLong(1);
+  allColumns.setColumnFloat(1.1F);
+  allColumns.setColumnDouble(1.1);
+  allColumns.setColumnBoolean(true);
+  allColumns.setColumnDate(new Date());
+  allColumns.setColumnBinary(new byte[20]);
+  realm.beginWrite();
+  RealmTableOrViewList<AllColumns> list=realm.allObjects(AllColumns.class);
+  assertEquals(0,list.size());
+  try {
+    list.add(allColumns);
+    fail("Should throw UnsupportedOperationException");
+    realm.commit();
+  }
+ catch (  UnsupportedOperationException e) {
+    e.printStackTrace();
+  }
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnFloat(float);RealmTest.java => public void testCreate(){
+  realm.beginWrite();
+  AllColumns obj=realm.create(AllColumns.class);
+  obj.setColumnString("dsfs");
+  obj.setColumnLong(1);
+  obj.setColumnFloat(1.1F);
+  obj.setColumnDouble(1.1);
+  obj.setColumnBoolean(true);
+  obj.setColumnDate(new Date());
+  obj.setColumnBinary(new byte[20]);
+  realm.commit();
+  RealmList<AllColumns> result=realm.where(AllColumns.class).findAll();
+  assertEquals(1,result.size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnFloat(float);RealmTest.java => public void testAdd(){
+  realm.beginWrite();
+  AllColumns obj=new AllColumns();
+  obj.setColumnString("dsfs");
+  obj.setColumnLong(1);
+  obj.setColumnFloat(1.1F);
+  obj.setColumnDouble(1.1);
+  obj.setColumnBoolean(true);
+  obj.setColumnDate(new Date());
+  obj.setColumnBinary(new byte[20]);
+  User user=new User();
+  user.setName("Rasmus");
+  user.setEmail("ra@realm.io");
+  user.setId(0);
+  obj.setColumnRealmObject(user);
+  realm.add(obj);
+  realm.commit();
+  assertEquals(1,realm.allObjects(AllColumns.class).size());
+  assertEquals(1,realm.allObjects(User.class).size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnFloat(float);RealmListTest.java => public void addObjectsToRealm(){
+  realm.beginWrite();
+  for (int i=0; i < 10; i++) {
+    AllColumns allColumns=realm.create(AllColumns.class);
+    allColumns.setColumnString("dsfs");
+    allColumns.setColumnLong(i);
+    allColumns.setColumnFloat(1.1F);
+    allColumns.setColumnDouble(1.1);
+    allColumns.setColumnBoolean(true);
+    allColumns.setColumnDate(new Date());
+    User user=realm.create(User.class);
+    user.setId(i);
+    user.setName("Test User");
+    user.setEmail("user@test.com");
+  }
+  realm.commit();
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnFloat(float);RealmListTest.java => public void testAddObject(){
+  realm.beginWrite();
+  AllColumns allColumns=realm.create(AllColumns.class);
+  allColumns.setColumnString("dsfs");
+  allColumns.setColumnLong(1);
+  allColumns.setColumnFloat(1.1F);
+  allColumns.setColumnDouble(1.1);
+  allColumns.setColumnBoolean(true);
+  allColumns.setColumnDate(new Date());
+  RealmTableOrViewList<AllColumns> list=realm.allObjects(AllColumns.class);
+  assertEquals(1,list.size());
+  try {
+    realm.commit();
+  }
+ catch (  UnsupportedOperationException e) {
+    e.printStackTrace();
+  }
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnFloat(float);RealmTest.java => public void testCreate(){
+  realm.beginWrite();
+  AllColumns obj=realm.create(AllColumns.class);
+  obj.setColumnString("dsfs");
+  obj.setColumnLong(1);
+  obj.setColumnFloat(1.1F);
+  obj.setColumnDouble(1.1);
+  obj.setColumnBoolean(true);
+  obj.setColumnDate(new Date());
+  realm.commit();
+  RealmList<AllColumns> result=realm.where(AllColumns.class).findAll();
+  assertEquals(1,result.size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnFloat(float);RealmTest.java => public void testAdd(){
+  realm.beginWrite();
+  AllColumns obj=realm.create(AllColumns.class);
+  obj.setColumnString("dsfs");
+  obj.setColumnLong(1);
+  obj.setColumnFloat(1.1F);
+  obj.setColumnDouble(1.1);
+  obj.setColumnBoolean(true);
+  obj.setColumnDate(new Date());
+  User user=realm.create(User.class);
+  user.setName("Rasmus");
+  user.setEmail("ra@realm.io");
+  user.setId(0);
+  realm.commit();
+  assertEquals(1,realm.allObjects(AllColumns.class).size());
+  assertEquals(1,realm.allObjects(User.class).size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnDouble(double);RealmListTest.java => public void addObjectsToRealm(){
+  realm.beginWrite();
+  for (int i=0; i < 10; i++) {
+    AllColumns allColumns=realm.create(AllColumns.class);
+    allColumns.setColumnString("dsfs");
+    allColumns.setColumnLong(i);
+    allColumns.setColumnFloat(1.1F);
+    allColumns.setColumnDouble(1.1);
+    allColumns.setColumnBoolean(true);
+    allColumns.setColumnDate(new Date());
+    allColumns.setColumnBinary(new byte[20]);
+    User user=realm.create(User.class);
+    user.setId(i);
+    user.setName("Test User");
+    user.setEmail("user@test.com");
+    allColumns.setColumnRealmObject(user);
+  }
+  realm.commit();
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnDouble(double);RealmListTest.java => public void testAddObject(){
+  realm.beginWrite();
+  AllColumns allColumns=realm.create(AllColumns.class);
+  allColumns.setColumnString("dsfs");
+  allColumns.setColumnLong(1);
+  allColumns.setColumnFloat(1.1F);
+  allColumns.setColumnDouble(1.1);
+  allColumns.setColumnBoolean(true);
+  allColumns.setColumnDate(new Date());
+  allColumns.setColumnBinary(new byte[20]);
+  RealmTableOrViewList<AllColumns> list=realm.allObjects(AllColumns.class);
+  assertEquals(1,list.size());
+  try {
+    realm.commit();
+  }
+ catch (  UnsupportedOperationException e) {
+    e.printStackTrace();
+  }
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnDouble(double);RealmTest.java => public void testCreate(){
+  realm.beginWrite();
+  AllColumns obj=realm.create(AllColumns.class);
+  obj.setColumnString("dsfs");
+  obj.setColumnLong(1);
+  obj.setColumnFloat(1.1F);
+  obj.setColumnDouble(1.1);
+  obj.setColumnBoolean(true);
+  obj.setColumnDate(new Date());
+  obj.setColumnBinary(new byte[20]);
+  realm.commit();
+  RealmList<AllColumns> result=realm.where(AllColumns.class).findAll();
+  assertEquals(1,result.size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnDouble(double);RealmTest.java => public void testAdd(){
+  realm.beginWrite();
+  AllColumns obj=realm.create(AllColumns.class);
+  obj.setColumnString("dsfs");
+  obj.setColumnLong(1);
+  obj.setColumnFloat(1.1F);
+  obj.setColumnDouble(1.1);
+  obj.setColumnBoolean(true);
+  obj.setColumnDate(new Date());
+  obj.setColumnBinary(new byte[20]);
+  User user=realm.create(User.class);
+  user.setName("Rasmus");
+  user.setEmail("ra@realm.io");
+  user.setId(0);
+  realm.commit();
+  assertEquals(1,realm.allObjects(AllColumns.class).size());
+  assertEquals(1,realm.allObjects(User.class).size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnDouble(double);RealmListTest.java => public void addObjectsToRealm(){
+  realm.beginWrite();
+  for (int i=0; i < 10; i++) {
+    AllColumns allColumns=new AllColumns();
+    allColumns.setColumnString("dsfs");
+    allColumns.setColumnLong(i);
+    allColumns.setColumnFloat(1.1F);
+    allColumns.setColumnDouble(1.1);
+    allColumns.setColumnBoolean(true);
+    allColumns.setColumnDate(new Date());
+    allColumns.setColumnBinary(new byte[20]);
+    User user=new User();
+    user.setId(i);
+    user.setName("Test User");
+    user.setEmail("user@test.com");
+    allColumns.setColumnRealmObject(user);
+    realm.add(allColumns);
+  }
+  realm.commit();
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnDouble(double);RealmListTest.java => public void testAddObject(){
+  AllColumns allColumns=new AllColumns();
+  allColumns.setColumnString("dsfs");
+  allColumns.setColumnLong(1);
+  allColumns.setColumnFloat(1.1F);
+  allColumns.setColumnDouble(1.1);
+  allColumns.setColumnBoolean(true);
+  allColumns.setColumnDate(new Date());
+  allColumns.setColumnBinary(new byte[20]);
+  realm.beginWrite();
+  RealmTableOrViewList<AllColumns> list=realm.allObjects(AllColumns.class);
+  assertEquals(0,list.size());
+  try {
+    list.add(allColumns);
+    fail("Should throw UnsupportedOperationException");
+    realm.commit();
+  }
+ catch (  UnsupportedOperationException e) {
+    e.printStackTrace();
+  }
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnDouble(double);RealmTest.java => public void testCreate(){
+  realm.beginWrite();
+  AllColumns obj=realm.create(AllColumns.class);
+  obj.setColumnString("dsfs");
+  obj.setColumnLong(1);
+  obj.setColumnFloat(1.1F);
+  obj.setColumnDouble(1.1);
+  obj.setColumnBoolean(true);
+  obj.setColumnDate(new Date());
+  obj.setColumnBinary(new byte[20]);
+  realm.commit();
+  RealmList<AllColumns> result=realm.where(AllColumns.class).findAll();
+  assertEquals(1,result.size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnDouble(double);RealmTest.java => public void testAdd(){
+  realm.beginWrite();
+  AllColumns obj=new AllColumns();
+  obj.setColumnString("dsfs");
+  obj.setColumnLong(1);
+  obj.setColumnFloat(1.1F);
+  obj.setColumnDouble(1.1);
+  obj.setColumnBoolean(true);
+  obj.setColumnDate(new Date());
+  obj.setColumnBinary(new byte[20]);
+  User user=new User();
+  user.setName("Rasmus");
+  user.setEmail("ra@realm.io");
+  user.setId(0);
+  obj.setColumnRealmObject(user);
+  realm.add(obj);
+  realm.commit();
+  assertEquals(1,realm.allObjects(AllColumns.class).size());
+  assertEquals(1,realm.allObjects(User.class).size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnDouble(double);RealmListTest.java => public void addObjectsToRealm(){
+  realm.beginWrite();
+  for (int i=0; i < 10; i++) {
+    AllColumns allColumns=realm.create(AllColumns.class);
+    allColumns.setColumnString("dsfs");
+    allColumns.setColumnLong(i);
+    allColumns.setColumnFloat(1.1F);
+    allColumns.setColumnDouble(1.1);
+    allColumns.setColumnBoolean(true);
+    allColumns.setColumnDate(new Date());
+    User user=realm.create(User.class);
+    user.setId(i);
+    user.setName("Test User");
+    user.setEmail("user@test.com");
+  }
+  realm.commit();
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnDouble(double);RealmListTest.java => public void testAddObject(){
+  realm.beginWrite();
+  AllColumns allColumns=realm.create(AllColumns.class);
+  allColumns.setColumnString("dsfs");
+  allColumns.setColumnLong(1);
+  allColumns.setColumnFloat(1.1F);
+  allColumns.setColumnDouble(1.1);
+  allColumns.setColumnBoolean(true);
+  allColumns.setColumnDate(new Date());
+  RealmTableOrViewList<AllColumns> list=realm.allObjects(AllColumns.class);
+  assertEquals(1,list.size());
+  try {
+    realm.commit();
+  }
+ catch (  UnsupportedOperationException e) {
+    e.printStackTrace();
+  }
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnDouble(double);RealmTest.java => public void testCreate(){
+  realm.beginWrite();
+  AllColumns obj=realm.create(AllColumns.class);
+  obj.setColumnString("dsfs");
+  obj.setColumnLong(1);
+  obj.setColumnFloat(1.1F);
+  obj.setColumnDouble(1.1);
+  obj.setColumnBoolean(true);
+  obj.setColumnDate(new Date());
+  realm.commit();
+  RealmList<AllColumns> result=realm.where(AllColumns.class).findAll();
+  assertEquals(1,result.size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnDouble(double);RealmTest.java => public void testAdd(){
+  realm.beginWrite();
+  AllColumns obj=realm.create(AllColumns.class);
+  obj.setColumnString("dsfs");
+  obj.setColumnLong(1);
+  obj.setColumnFloat(1.1F);
+  obj.setColumnDouble(1.1);
+  obj.setColumnBoolean(true);
+  obj.setColumnDate(new Date());
+  User user=realm.create(User.class);
+  user.setName("Rasmus");
+  user.setEmail("ra@realm.io");
+  user.setId(0);
+  realm.commit();
+  assertEquals(1,realm.allObjects(AllColumns.class).size());
+  assertEquals(1,realm.allObjects(User.class).size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnBoolean(boolean);RealmListTest.java => public void addObjectsToRealm(){
+  realm.beginWrite();
+  for (int i=0; i < 10; i++) {
+    AllColumns allColumns=realm.create(AllColumns.class);
+    allColumns.setColumnString("dsfs");
+    allColumns.setColumnLong(i);
+    allColumns.setColumnFloat(1.1F);
+    allColumns.setColumnDouble(1.1);
+    allColumns.setColumnBoolean(true);
+    allColumns.setColumnDate(new Date());
+    allColumns.setColumnBinary(new byte[20]);
+    User user=realm.create(User.class);
+    user.setId(i);
+    user.setName("Test User");
+    user.setEmail("user@test.com");
+    allColumns.setColumnRealmObject(user);
+  }
+  realm.commit();
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnBoolean(boolean);RealmListTest.java => public void testAddObject(){
+  realm.beginWrite();
+  AllColumns allColumns=realm.create(AllColumns.class);
+  allColumns.setColumnString("dsfs");
+  allColumns.setColumnLong(1);
+  allColumns.setColumnFloat(1.1F);
+  allColumns.setColumnDouble(1.1);
+  allColumns.setColumnBoolean(true);
+  allColumns.setColumnDate(new Date());
+  allColumns.setColumnBinary(new byte[20]);
+  RealmTableOrViewList<AllColumns> list=realm.allObjects(AllColumns.class);
+  assertEquals(1,list.size());
+  try {
+    realm.commit();
+  }
+ catch (  UnsupportedOperationException e) {
+    e.printStackTrace();
+  }
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnBoolean(boolean);RealmTest.java => public void testCreate(){
+  realm.beginWrite();
+  AllColumns obj=realm.create(AllColumns.class);
+  obj.setColumnString("dsfs");
+  obj.setColumnLong(1);
+  obj.setColumnFloat(1.1F);
+  obj.setColumnDouble(1.1);
+  obj.setColumnBoolean(true);
+  obj.setColumnDate(new Date());
+  obj.setColumnBinary(new byte[20]);
+  realm.commit();
+  RealmList<AllColumns> result=realm.where(AllColumns.class).findAll();
+  assertEquals(1,result.size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnBoolean(boolean);RealmTest.java => public void testAdd(){
+  realm.beginWrite();
+  AllColumns obj=realm.create(AllColumns.class);
+  obj.setColumnString("dsfs");
+  obj.setColumnLong(1);
+  obj.setColumnFloat(1.1F);
+  obj.setColumnDouble(1.1);
+  obj.setColumnBoolean(true);
+  obj.setColumnDate(new Date());
+  obj.setColumnBinary(new byte[20]);
+  User user=realm.create(User.class);
+  user.setName("Rasmus");
+  user.setEmail("ra@realm.io");
+  user.setId(0);
+  realm.commit();
+  assertEquals(1,realm.allObjects(AllColumns.class).size());
+  assertEquals(1,realm.allObjects(User.class).size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnBoolean(boolean);RealmListTest.java => public void addObjectsToRealm(){
+  realm.beginWrite();
+  for (int i=0; i < 10; i++) {
+    AllColumns allColumns=new AllColumns();
+    allColumns.setColumnString("dsfs");
+    allColumns.setColumnLong(i);
+    allColumns.setColumnFloat(1.1F);
+    allColumns.setColumnDouble(1.1);
+    allColumns.setColumnBoolean(true);
+    allColumns.setColumnDate(new Date());
+    allColumns.setColumnBinary(new byte[20]);
+    User user=new User();
+    user.setId(i);
+    user.setName("Test User");
+    user.setEmail("user@test.com");
+    allColumns.setColumnRealmObject(user);
+    realm.add(allColumns);
+  }
+  realm.commit();
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnBoolean(boolean);RealmListTest.java => public void testAddObject(){
+  AllColumns allColumns=new AllColumns();
+  allColumns.setColumnString("dsfs");
+  allColumns.setColumnLong(1);
+  allColumns.setColumnFloat(1.1F);
+  allColumns.setColumnDouble(1.1);
+  allColumns.setColumnBoolean(true);
+  allColumns.setColumnDate(new Date());
+  allColumns.setColumnBinary(new byte[20]);
+  realm.beginWrite();
+  RealmTableOrViewList<AllColumns> list=realm.allObjects(AllColumns.class);
+  assertEquals(0,list.size());
+  try {
+    list.add(allColumns);
+    fail("Should throw UnsupportedOperationException");
+    realm.commit();
+  }
+ catch (  UnsupportedOperationException e) {
+    e.printStackTrace();
+  }
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnBoolean(boolean);RealmTest.java => public void testCreate(){
+  realm.beginWrite();
+  AllColumns obj=realm.create(AllColumns.class);
+  obj.setColumnString("dsfs");
+  obj.setColumnLong(1);
+  obj.setColumnFloat(1.1F);
+  obj.setColumnDouble(1.1);
+  obj.setColumnBoolean(true);
+  obj.setColumnDate(new Date());
+  obj.setColumnBinary(new byte[20]);
+  realm.commit();
+  RealmList<AllColumns> result=realm.where(AllColumns.class).findAll();
+  assertEquals(1,result.size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnBoolean(boolean);RealmTest.java => public void testAdd(){
+  realm.beginWrite();
+  AllColumns obj=new AllColumns();
+  obj.setColumnString("dsfs");
+  obj.setColumnLong(1);
+  obj.setColumnFloat(1.1F);
+  obj.setColumnDouble(1.1);
+  obj.setColumnBoolean(true);
+  obj.setColumnDate(new Date());
+  obj.setColumnBinary(new byte[20]);
+  User user=new User();
+  user.setName("Rasmus");
+  user.setEmail("ra@realm.io");
+  user.setId(0);
+  obj.setColumnRealmObject(user);
+  realm.add(obj);
+  realm.commit();
+  assertEquals(1,realm.allObjects(AllColumns.class).size());
+  assertEquals(1,realm.allObjects(User.class).size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnBoolean(boolean);RealmListTest.java => public void addObjectsToRealm(){
+  realm.beginWrite();
+  for (int i=0; i < 10; i++) {
+    AllColumns allColumns=realm.create(AllColumns.class);
+    allColumns.setColumnString("dsfs");
+    allColumns.setColumnLong(i);
+    allColumns.setColumnFloat(1.1F);
+    allColumns.setColumnDouble(1.1);
+    allColumns.setColumnBoolean(true);
+    allColumns.setColumnDate(new Date());
+    User user=realm.create(User.class);
+    user.setId(i);
+    user.setName("Test User");
+    user.setEmail("user@test.com");
+  }
+  realm.commit();
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnBoolean(boolean);RealmListTest.java => public void testAddObject(){
+  realm.beginWrite();
+  AllColumns allColumns=realm.create(AllColumns.class);
+  allColumns.setColumnString("dsfs");
+  allColumns.setColumnLong(1);
+  allColumns.setColumnFloat(1.1F);
+  allColumns.setColumnDouble(1.1);
+  allColumns.setColumnBoolean(true);
+  allColumns.setColumnDate(new Date());
+  RealmTableOrViewList<AllColumns> list=realm.allObjects(AllColumns.class);
+  assertEquals(1,list.size());
+  try {
+    realm.commit();
+  }
+ catch (  UnsupportedOperationException e) {
+    e.printStackTrace();
+  }
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnBoolean(boolean);RealmTest.java => public void testCreate(){
+  realm.beginWrite();
+  AllColumns obj=realm.create(AllColumns.class);
+  obj.setColumnString("dsfs");
+  obj.setColumnLong(1);
+  obj.setColumnFloat(1.1F);
+  obj.setColumnDouble(1.1);
+  obj.setColumnBoolean(true);
+  obj.setColumnDate(new Date());
+  realm.commit();
+  RealmList<AllColumns> result=realm.where(AllColumns.class).findAll();
+  assertEquals(1,result.size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\androidTest\java\io\realm\tests\typed\entities\AllColumns;setColumnBoolean(boolean);RealmTest.java => public void testAdd(){
+  realm.beginWrite();
+  AllColumns obj=realm.create(AllColumns.class);
+  obj.setColumnString("dsfs");
+  obj.setColumnLong(1);
+  obj.setColumnFloat(1.1F);
+  obj.setColumnDouble(1.1);
+  obj.setColumnBoolean(true);
+  obj.setColumnDate(new Date());
+  User user=realm.create(User.class);
+  user.setName("Rasmus");
+  user.setEmail("ra@realm.io");
+  user.setId(0);
+  realm.commit();
+  assertEquals(1,realm.allObjects(AllColumns.class).size());
+  assertEquals(1,realm.allObjects(User.class).size());
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_ca31c_0fb6e/rev_ca31c-0fb6e;\RealmAndroid\lib\src\main\java\io\realm\example\entities\UserRealmProxy;getName();User.java => @Override public String toString(){
+  return this.getName();
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_e689b_2692e/rev_e689b-2692e;\distribution\RealmBasicExample\app\src\main\java\io\realm\examples\realmintroexample\RealmBasicExampleActivity;basicReadWrite();RealmIntroExampleActivity.java => @Override protected void onCreate(Bundle savedInstanceState){
+  super.onCreate(savedInstanceState);
+  setContentView(R.layout.activity_realm_basic_example);
+  rootLayout=((LinearLayout)findViewById(R.id.container));
+  rootLayout.removeAllViews();
+  try {
+    basicReadWrite();
+    basicUpdate();
+    basicQuery();
+  }
+ catch (  IOException e) {
+    e.printStackTrace();
+  }
+  new AsyncTask<Void,Void,String>(){
+    @Override protected String doInBackground(    Void... voids){
+      String info=null;
+      try {
+        info=complexReadWrite();
+        info+=complexQuery();
+      }
+ catch (      IOException e) {
+        e.printStackTrace();
+      }
+      return info;
+    }
+    @Override protected void onPostExecute(    String result){
+      showStatus(result);
+    }
+  }
+.execute();
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_e689b_2692e/rev_e689b-2692e;\distribution\RealmBasicExample\app\src\main\java\io\realm\examples\realmintroexample\RealmBasicExampleActivity;basicQuery();RealmIntroExampleActivity.java => @Override protected void onCreate(Bundle savedInstanceState){
+  super.onCreate(savedInstanceState);
+  setContentView(R.layout.activity_realm_basic_example);
+  rootLayout=((LinearLayout)findViewById(R.id.container));
+  rootLayout.removeAllViews();
+  try {
+    basicReadWrite();
+    basicUpdate();
+    basicQuery();
+  }
+ catch (  IOException e) {
+    e.printStackTrace();
+  }
+  new AsyncTask<Void,Void,String>(){
+    @Override protected String doInBackground(    Void... voids){
+      String info=null;
+      try {
+        info=complexReadWrite();
+        info+=complexQuery();
+      }
+ catch (      IOException e) {
+        e.printStackTrace();
+      }
+      return info;
+    }
+    @Override protected void onPostExecute(    String result){
+      showStatus(result);
+    }
+  }
+.execute();
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_e689b_2692e/rev_e689b-2692e;\distribution\RealmBasicExample\app\src\main\java\io\realm\examples\realmintroexample\RealmBasicExampleActivity;basicUpdate();RealmIntroExampleActivity.java => @Override protected void onCreate(Bundle savedInstanceState){
+  super.onCreate(savedInstanceState);
+  setContentView(R.layout.activity_realm_basic_example);
+  rootLayout=((LinearLayout)findViewById(R.id.container));
+  rootLayout.removeAllViews();
+  try {
+    basicReadWrite();
+    basicUpdate();
+    basicQuery();
+  }
+ catch (  IOException e) {
+    e.printStackTrace();
+  }
+  new AsyncTask<Void,Void,String>(){
+    @Override protected String doInBackground(    Void... voids){
+      String info=null;
+      try {
+        info=complexReadWrite();
+        info+=complexQuery();
+      }
+ catch (      IOException e) {
+        e.printStackTrace();
+      }
+      return info;
+    }
+    @Override protected void onPostExecute(    String result){
+      showStatus(result);
+    }
+  }
+.execute();
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_e689b_2692e/rev_e689b-2692e;\distribution\RealmBasicExample\app\src\main\java\io\realm\examples\realmintroexample\RealmBasicExampleActivity;complexReadWrite();RealmIntroExampleActivity.java => @Override protected String doInBackground(Void... voids){
+  String info=null;
+  try {
+    info=complexReadWrite();
+    info+=complexQuery();
+  }
+ catch (  IOException e) {
+    e.printStackTrace();
+  }
+  return info;
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_e689b_2692e/rev_e689b-2692e;\distribution\RealmBasicExample\app\src\main\java\io\realm\examples\realmintroexample\RealmBasicExampleActivity;complexQuery();RealmIntroExampleActivity.java => @Override protected String doInBackground(Void... voids){
+  String info=null;
+  try {
+    info=complexReadWrite();
+    info+=complexQuery();
+  }
+ catch (  IOException e) {
+    e.printStackTrace();
+  }
+  return info;
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_1a547_d1f69/rev_1a547-d1f69;\distribution\RealmBasicExample\app\src\main\java\io\realm\examples\realmintroexample\RealmBasicExampleActivity;complexReadWrite();RealmIntroExampleActivity.java => @Override protected String doInBackground(Void... voids){
+  String info=null;
+  try {
+    info=complexReadWrite();
+    info+=complexQuery();
+  }
+ catch (  IOException e) {
+    e.printStackTrace();
+  }
+  return info;
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_899e5_34fb3/rev_899e5-34fb3;\distribution\RealmBasicExample\app\src\main\java\io\realm\examples\realmintroexample\RealmBasicExampleActivity;complexReadWrite();RealmIntroExampleActivity.java => @Override protected String doInBackground(Void... voids){
+  String info=null;
+  try {
+    info=complexReadWrite();
+    info+=complexQuery();
+  }
+ catch (  IOException e) {
+    e.printStackTrace();
+  }
+  return info;
+}
+
+C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/realm-java/revisions/rev_7121a_855e2/rev_7121a-855e2;\realm\src\main\java\io\realm\Realm;setVersion(int);Realm.java => private static Realm createAndValidate(String absolutePath,boolean validateSchema){
+  Map<String,Realm> realms=realmsCache.get();
+  Realm realm=realms.get(absolutePath);
+  if (realm == null) {
+    realm=new Realm(absolutePath);
+    realms.put(absolutePath,realm);
+    realmsCache.set(realms);
+  }
+  if (validateSchema) {
+    if (!validatedPaths.contains(absolutePath)) {
+      Class<?> validationClass;
+      try {
+        validationClass=Class.forName("io.realm.ValidationList");
+      }
+ catch (      ClassNotFoundException e) {
+        throw new RealmException("Could not find the generated ValidationList class");
+      }
+      Method getProxyClassesMethod;
+      try {
+        getProxyClassesMethod=validationClass.getMethod("getProxyClasses");
+      }
+ catch (      NoSuchMethodException e) {
+        throw new RealmException("Could not find the getProxyClasses method in the ValidationList class");
+      }
+      List<String> proxyClasses;
+      try {
+        proxyClasses=(List<String>)getProxyClassesMethod.invoke(null);
+      }
+ catch (      IllegalAccessException e) {
+        throw new RealmException("Could not execute the getProxyClasses method in the ValidationList class");
+      }
+catch (      InvocationTargetException e) {
+        throw new RealmException("An exception was thrown in the getProxyClasses method in the ValidationList class");
+      }
+      long version=realm.getVersion();
+      try {
+        realm.beginTransaction();
+        if (version == UNVERSIONED) {
+          realm.setVersion(0);
+        }
+        for (        String className : proxyClasses) {
+          String modelClassName=Iterables.getLast(Splitter.on(".").split(className));
+          String generatedClassName="io.realm." + modelClassName + "RealmProxy";
+          Class<?> generatedClass;
+          try {
+            generatedClass=Class.forName(generatedClassName);
+          }
+ catch (          ClassNotFoundException e) {
+            throw new RealmException("Could not find the generated " + generatedClassName + " class");
+          }
+          if (version == UNVERSIONED) {
+            Method initTableMethod;
+            try {
+              initTableMethod=generatedClass.getMethod("initTable",new Class[]{ImplicitTransaction.class});
+            }
+ catch (            NoSuchMethodException e) {
+              throw new RealmException("Could not find the initTable method in the generated " + generatedClassName + " class");
+            }
+            try {
+              initTableMethod.invoke(null,realm.transaction);
+            }
+ catch (            IllegalAccessException e) {
+              throw new RealmException("Could not execute the initTable method in the " + generatedClassName + " class");
+            }
+catch (            InvocationTargetException e) {
+              throw new RealmException("An exception was thrown in the initTable method in the " + generatedClassName + " class");
+            }
+          }
+          Method validateMethod;
+          try {
+            validateMethod=generatedClass.getMethod("validateTable",new Class[]{ImplicitTransaction.class});
+          }
+ catch (          NoSuchMethodException e) {
+            throw new RealmException("Could not find the validateTable method in the generated " + generatedClassName + " class");
+          }
+          try {
+            validateMethod.invoke(null,realm.transaction);
+          }
+ catch (          IllegalAccessException e) {
+            throw new RealmException("Could not execute the validateTable method in the " + generatedClassName + " class");
+          }
+catch (          InvocationTargetException e) {
+            throw new RealmMigrationNeededException(e.getMessage());
+          }
+          Method fieldNamesMethod;
+          try {
+            fieldNamesMethod=generatedClass.getMethod("getFieldNames");
+          }
+ catch (          NoSuchMethodException e) {
+            throw new RealmException("Could not find the getFieldNames method in the generated " + generatedClassName + " class");
+          }
+          List<String> fieldNames;
+          try {
+            fieldNames=(List<String>)fieldNamesMethod.invoke(null);
+          }
+ catch (          IllegalAccessException e) {
+            throw new RealmException("Could not execute the getFieldNames method in the generated " + generatedClassName + " class");
+          }
+catch (          InvocationTargetException e) {
+            throw new RealmException("An exception was thrown in the getFieldNames method in the generated " + generatedClassName + " class");
+          }
+          Table table=realm.transaction.getTable(TABLE_PREFIX + modelClassName);
+          for (          String fieldName : fieldNames) {
+            long columnIndex=table.getColumnIndex(fieldName);
+            if (columnIndex == -1) {
+              throw new RealmMigrationNeededException("Column '" + fieldName + "' not found for type '"+ modelClassName+ "'");
+            }
+            columnIndices.put(modelClassName,fieldName,columnIndex);
+          }
+        }
+        validatedPaths.add(absolutePath);
+      }
+  finally {
+        realm.commitTransaction();
+      }
+    }
+  }
+  return realm;
+}
+
