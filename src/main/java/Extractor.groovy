@@ -50,7 +50,7 @@ class Extractor {
 		this.project			= project
 		this.listMergeCommit 	= this.project.listMergeCommit
 		this.remoteUrl 			= this.project.url
-		this.projectsDirectory	= "C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/"
+		this.projectsDirectory	= "E:/Mestrado/FPFNAnalysis/projects/"
 		this.tempdir			= this.projectsDirectory + "temp/" +this.project.name+"/git"
 		this.repositoryDir		= this.projectsDirectory + this.project.name + "/git"
 		this.CONFLICTS 			= 0
@@ -60,7 +60,7 @@ class Extractor {
 
 	public Extractor(MergeCommit mergeCommit){
 		this.remoteUrl 			= mergeCommit.projectURL
-		this.projectsDirectory	= "C:/GGTS/workspace/Mestrado/FPFNAnalysis/projects/"
+		this.projectsDirectory	= "E:/Mestrado/FPFNAnalysis/projects/"
 		this.tempdir			= this.projectsDirectory + "temp/" + mergeCommit.projectName +"/git"
 		this.repositoryDir		= this.projectsDirectory + mergeCommit.projectName + "/git"
 		this.CONFLICTS 			= 0
@@ -670,10 +670,21 @@ class Extractor {
 	}
 
 	def private restoreGitRepository(){
-		println "Restoring Git repository..."
-		this.git.getRepository().close()
+		println "Restoring Git repository " + this.remoteUrl +"..."
+		// this.git.getRepository().close()
 		// restoring the backup dir
-		new File(this.repositoryDir).deleteDir()
+		// (new File(this.repositoryDir)).deleteDir()
+		new AntBuilder().delete(dir:this.repositoryDir,failonerror:false)
+		new AntBuilder().copy(todir:this.repositoryDir) {fileset(dir:this.tempdir , defaultExcludes: false){}}
+	}
+	
+	def public restoreWorkingFolder(){
+		println "Restoring Git repository " + this.remoteUrl +"..."
+		// this.git.getRepository().close()
+		// restoring the backup dir
+		// (new File(this.repositoryDir)).deleteDir()
+		String workingFolder = (new File(this.repositoryDir)).getParent()
+		new AntBuilder().delete(dir:workingFolder,failonerror:false)
 		new AntBuilder().copy(todir:this.repositoryDir) {fileset(dir:this.tempdir , defaultExcludes: false){}}
 	}
 

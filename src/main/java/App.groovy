@@ -89,6 +89,7 @@ class App {
 	}
 
 	def static runFPFNAnalysis(ArrayList<Project> projects){
+		restoreGitRepositories(projects)
 		LinkedList<MergeCommit> horizontalExecutionMergeCommits = fillMergeCommitsListForHorizontalExecution(projects)
 		for(int i=0; i<horizontalExecutionMergeCommits.size();i++){
 			MergeCommit m = horizontalExecutionMergeCommits.get(i);
@@ -108,7 +109,6 @@ class App {
 				MethodReferencesFinderAST finder = new MethodReferencesFinderAST()
 				finder.run(mergeResult,candidates.renamingCandidates, candidates.importCandidates, candidates.duplicatedCandidates)
 
-				//TODO
 				printMergeResult(mergeResult)
 
 				fillExecutionLog(m)
@@ -116,6 +116,16 @@ class App {
 				(new AntBuilder()).delete(dir:revisionFolderDir,failonerror:false)
 			}
 		}
+	}
+	
+	def private static restoreGitRepositories(ArrayList<Project> projects){
+		//Read r = new Read("projects.csv")
+		//def projects = r.getProjects()
+		projects.each {
+			Extractor e = new Extractor(it)
+			e.restoreWorkingFolder()
+		}
+		println('Restore finished!\n')
 	}
 
 	def private static LinkedList<MergeCommit> fillMergeCommitsListForHorizontalExecution(ArrayList<Project> projects){
@@ -169,93 +179,104 @@ class App {
 		def rows = new ArrayList<String>()
 		boolean projectFound = false
 		def project
-		def mergeScenarios 				
-		def fpOrderingMergeScenarios 	
-		def fpRenamingMergeScenarios 	
-		def fnDuplicationMergeScenarios 
-		def fnImportMergeScenarios 		
-		def textualConfUnmerge			
-		def textualConfSsmerge			
-		def fpOrderingConf 				
-		def fpRenamingConf 				
-		def fnDuplicationMissed 		
-		def fnImportMissed 
-		
-		mergeResult.orderingConflicts = mergeResult.linedbasedConfs - (mergeResult.ssmergeConfs - mergeResult.renamingConflictsFromSsmerge)
+		def mergeScenarios
+		def fpOrderingMergeScenarios
+		def fpRenamingMergeScenarios
+		def fnDuplicationMergeScenarios
+		def fnImportMergeScenarios
+		def textualConfUnmerge
+		def textualConfSsmerge
+		def fpOrderingConf
+		def fpRenamingConf
+		def fnDuplicationMissed
+		def fnImportMissed
 
+		//mergeResult.orderingConflicts = mergeResult.linedbasedConfs - (mergeResult.ssmergeConfs - mergeResult.renamingConflictsFromSsmerge)
+		
+		int tssmerge = (mergeResult.ssmergeConfs+mergeResult.importIssuesFromParser+mergeResult.importIssuesFromSsmergePackageMember);
+		mergeResult.orderingConflicts = ((mergeResult.linedbasedConfs - (tssmerge - mergeResult.renamingConflictsFromSsmerge))>0)?(mergeResult.linedbasedConfs - (tssmerge - mergeResult.renamingConflictsFromSsmerge)):0
+		
 		new File('results/resultFPFNAnalysis.csv').splitEachLine(' ') {fields ->
 			project = fields[0]
 			if(project == mergeResult.projectName){
-				 mergeScenarios 				= fields[1].toInteger() + 1
-				 fpOrderingMergeScenarios 		= (mergeResult.orderingConflicts>0)?((fields[2]).toInteger()+1):(fields[2]) 
-				 fpRenamingMergeScenarios 		= (mergeResult.renamingConflictsFromParser>0)?((fields[3]).toInteger()+1):(fields[3])
-				 fnDuplicationMergeScenarios 	= (mergeResult.duplicationIssuesFromParser>0)?((fields[4]).toInteger()+1):(fields[4])
-				 fnImportMergeScenarios 		= (mergeResult.importIssuesFromParser>0)?((fields[5]).toInteger()+1):(fields[5])
-				 textualConfUnmerge				= fields[6].toInteger()+mergeResult.linedbasedConfs
-				 textualConfSsmerge				= fields[7].toInteger()+mergeResult.ssmergeConfs
-				 fpOrderingConf 				= fields[8].toInteger()+mergeResult.orderingConflicts
-				 fpRenamingConf 				= fields[9].toInteger()+(mergeResult.renamingConflictsFromSsmerge-mergeResult.renamingConflictsFromParser)
-				 fnDuplicationMissed 			= fields[10].toInteger()+mergeResult.duplicationIssuesFromParser
-				 fnImportMissed 				= fields[11].toInteger()+mergeResult.importIssuesFromParser
-				 projectFound = true;
-				 def updatedRow = [project,mergeScenarios,
-				       fpOrderingMergeScenarios,fpRenamingMergeScenarios,
-					   fnDuplicationMergeScenarios,fnImportMergeScenarios,
-					   textualConfUnmerge,textualConfSsmerge,
-					   fpOrderingConf,fpRenamingConf,
-					   fnDuplicationMissed,fnImportMissed]
-				 rows.add(updatedRow.join(' '))
+				mergeScenarios 					= fields[1].toInteger() + 1
+				fpOrderingMergeScenarios 		= (mergeResult.orderingConflicts>0)?((fields[2]).toInteger()+1):(fields[2])
+				fpRenamingMergeScenarios 		= ((mergeResult.renamingConflictsFromSsmerge-mergeResult.renamingConflictsFromParser)>0)?((fields[3]).toInteger()+1):(fields[3])
+				fnDuplicationMergeScenarios 	= (mergeResult.duplicationIssuesFromParser>0)?((fields[4]).toInteger()+1):(fields[4])
+				fnImportMergeScenarios 			= ((mergeResult.importIssuesFromParser + mergeResult.importIssuesFromSsmergePackageMember)>0)?((fields[5]).toInteger()+1):(fields[5])
+				textualConfUnmerge				= fields[6].toInteger()+mergeResult.linedbasedConfs
+				textualConfSsmerge				= fields[7].toInteger()+mergeResult.ssmergeConfs
+				fpOrderingConf 					= fields[8].toInteger()+mergeResult.orderingConflicts
+				fpRenamingConf 					= fields[9].toInteger()+(mergeResult.renamingConflictsFromSsmerge-mergeResult.renamingConflictsFromParser)
+				fnDuplicationMissed 			= fields[10].toInteger()+mergeResult.duplicationIssuesFromParser
+				fnImportMissed 					= fields[11].toInteger()+(mergeResult.importIssuesFromParser + mergeResult.importIssuesFromSsmergePackageMember)
+				projectFound = true;
+				def updatedRow = [project,mergeScenarios,
+					fpOrderingMergeScenarios,fpRenamingMergeScenarios,
+					fnDuplicationMergeScenarios,fnImportMergeScenarios,
+					textualConfUnmerge,textualConfSsmerge,
+					fpOrderingConf,fpRenamingConf,
+					fnDuplicationMissed,fnImportMissed]
+				rows.add(updatedRow.join(' '))
 			} else {
 				rows.add(fields.join(' '))
 			}
 		}
 		//otherwise, create a new instance
 		if(!projectFound){
-			 project 						= mergeResult.projectName
-			 mergeScenarios 				= 1
-			 fpOrderingMergeScenarios 		= (mergeResult.orderingConflicts>0)?1:0
-			 fpRenamingMergeScenarios 		= (mergeResult.renamingConflictsFromParser>0)?1:0
-			 fnDuplicationMergeScenarios 	= (mergeResult.duplicationIssuesFromParser>0)?1:0
-			 fnImportMergeScenarios 		= (mergeResult.importIssuesFromParser>0)?1:0
-			 textualConfSsmerge				= mergeResult.ssmergeConfs
-			 textualConfUnmerge				= mergeResult.linedbasedConfs
-			 fpOrderingConf 				= mergeResult.orderingConflicts
-			 fpRenamingConf 				= (mergeResult.renamingConflictsFromSsmerge-mergeResult.renamingConflictsFromParser)
-			 fnDuplicationMissed 			= mergeResult.duplicationIssuesFromParser
-			 fnImportMissed 				= mergeResult.importIssuesFromParser
-			 
-			 def newRow = [project,mergeScenarios,
-				 fpOrderingMergeScenarios,fpRenamingMergeScenarios,
-				 fnDuplicationMergeScenarios,fnImportMergeScenarios,
-				 textualConfUnmerge,textualConfSsmerge,
-				 fpOrderingConf,fpRenamingConf,
-				 fnDuplicationMissed,fnImportMissed]
-			 
-			 rows.add(newRow.join(' '))
-		}			 
+			project 						= mergeResult.projectName
+			mergeScenarios 					= 1
+			fpOrderingMergeScenarios 		= (mergeResult.orderingConflicts>0)?1:0
+			fpRenamingMergeScenarios 		= ((mergeResult.renamingConflictsFromSsmerge-mergeResult.renamingConflictsFromParser)>0)?1:0
+			fnDuplicationMergeScenarios 	= (mergeResult.duplicationIssuesFromParser>0)?1:0
+			fnImportMergeScenarios 			= ((mergeResult.importIssuesFromParser + mergeResult.importIssuesFromSsmergePackageMember)>0)?1:0
+			textualConfSsmerge				= mergeResult.ssmergeConfs
+			textualConfUnmerge				= mergeResult.linedbasedConfs
+			fpOrderingConf 					= mergeResult.orderingConflicts
+			fpRenamingConf 					= (mergeResult.renamingConflictsFromSsmerge-mergeResult.renamingConflictsFromParser)
+			fnDuplicationMissed 			= mergeResult.duplicationIssuesFromParser
+			fnImportMissed 					= mergeResult.importIssuesFromParser + mergeResult.importIssuesFromSsmergePackageMember
+
+			def newRow = [project,mergeScenarios,
+				fpOrderingMergeScenarios,fpRenamingMergeScenarios,
+				fnDuplicationMergeScenarios,fnImportMergeScenarios,
+				textualConfUnmerge,textualConfSsmerge,
+				fpOrderingConf,fpRenamingConf,
+				fnDuplicationMissed,fnImportMissed]
+
+			rows.add(newRow.join(' '))
+		}
 
 		//printing the result file
 		def out = new File('results/resultFPFNAnalysis.csv')
 		// deleting old files if it exists
 		out.delete()
 		out = new File('results/resultFPFNAnalysis.csv')
-		//def firstRow = ["Project","MergeScenarios","FPOrderingMergeScenarios","FPRenamingMergeScenarios","FNDuplicationMergeScenarios","FNImportMergeScenarios","TextualConfUnmerge","TextualConfSsmerge","FPOrderingConf","FPRenamingConf","FNDuplicationMissed","FNImportMissed"]
-		//out.append firstRow.join(' ')
-		//out.append '\n'
 		rows.each {
 			out.append it
 			out.append '\n'
 		}
-		
-		//callRScript()
+
+		//publishResults()
 	}
-	
+
 	def private static publishResults(){
-		def command = "C:/Program Files/R/R-3.2.1/bin/Rscript.exe"
+		try{
+			def command = "\"C:\\Program Files\\R\\R-3.1.3\\bin\\Rscript.exe\" \"C:\\GGTS\\ggts-bundle\\workspace\\GitCE\\processResultsScript.r\""
+			Runtime run = Runtime.getRuntime()
+			Process pr = run.exec(command)
+			new AntBuilder().copy(todir:"C:\\Users\\Guilherme\\Google Drive\\Pós-Graduação\\Pesquisa\\Outros\\ISQFIEDMA_results", overwrite:true) {fileset(dir:"C:\\GGTS\\ggts-bundle\\workspace\\GitCE\\results\\html" , defaultExcludes: false)}
+			new AntBuilder().copy(file:"C:\\GGTS\\ggts-bundle\\workspace\\GitCE\\results\\html\\resultFPFN.html", todir:"C:\\Users\\Guilherme\\Google Drive\\Pós-Graduação\\Pesquisa\\Outros\\ISQFIEDMA_results", overwrite:true)
+		} catch(Exception e){
+			e.printStackTrace()
+		}
 	}
 
 	public static void main (String[] args){
+		//restoreGitRepositories()
 		ArrayList<Project> projects = readProjects();
 		runFPFNAnalysis(projects)
+		//runWithCommitCsv()
+		//publishResults()
 	}
 }
