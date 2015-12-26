@@ -677,7 +677,7 @@ class Extractor {
 		new AntBuilder().delete(dir:this.repositoryDir,failonerror:false)
 		new AntBuilder().copy(todir:this.repositoryDir) {fileset(dir:this.tempdir , defaultExcludes: false){}}
 	}
-	
+
 	def public restoreWorkingFolder(){
 		println "Restoring Git repository " + this.remoteUrl +"..."
 		// this.git.getRepository().close()
@@ -755,5 +755,11 @@ class Extractor {
 		//new AntBuilder().copy(todir:"C:/GGTS/ggts-bundle/workspace/others/git clones bkp") {fileset(dir:"C:/GGTS/ggts-bundle/workspace/others/git clones" , defaultExcludes: false){}}
 		//new AntBuilder().copy(todir:"C:/Vbox/examples_esem") {fileset(dir:"C:/Vbox/FSTMerge/examples" , defaultExcludes: false){}}}
 		//new AntBuilder().zip(destfile: "C:\\Users\\Guilherme\\.m2.zip", basedir: "C:\\Users\\Guilherme\\.m2")
-		new AntBuilder().copy(todir:"C:\\GGTS\\ggts-bundle\\workspace\\others") {fileset(dir:"C:\\GGTS\\ggts-bundle\\others\\all revisions" , defaultExcludes: false){}}}
+		//new AntBuilder().copy(todir:"C:\\GGTS\\ggts-bundle\\workspace\\others") {fileset(dir:"C:\\GGTS\\ggts-bundle\\others\\all revisions" , defaultExcludes: false){}}}
+
+		//		String memberName = "first";
+		//		String s = "return first() + familyName;"
+		//		println s.matches("(?s).*\\b"+memberName+"\\b.*")
+
+	}
 }

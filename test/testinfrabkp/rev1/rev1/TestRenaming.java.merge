@@ -1,0 +1,21 @@
+public class TestRenaming{
+<<<<<<< C:\GGTS\workspace\GitCE\fstmerge_tmp1450919570941\fstmerge_var1_8607138804166613991.java
+	void givenName(String name){
+		System.out.println(name);
+=======
+	void givenName(){
+		System.out.println("Guilherme");
+>>>>>>> C:\GGTS\workspace\GitCE\fstmerge_tmp1450919570941\fstmerge_var2_540299279995089723.java
+	}
+	
+<<<<<<< C:\GGTS\workspace\GitCE\fstmerge_tmp1450919570941\fstmerge_var1_8607138804166613991.java
+	void doMath(int a, int b, int c){
+		return a+b+c;
+=======
+	void doMath(int a, int b){
+		return a	+	b;
+>>>>>>> C:\GGTS\workspace\GitCE\fstmerge_tmp1450919570941\fstmerge_var2_540299279995089723.java
+	}
+	
+}
+

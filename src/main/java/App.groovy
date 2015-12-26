@@ -1,8 +1,9 @@
 import java.util.ArrayList;
 
-import util.FPFNCandidates;
 import merger.FSTGenMerger;
-import merger.MergeResult;
+import util.FPFNCandidates;
+import util.MergeResult;
+import util.LoggerPrintStream;
 
 
 class App {
@@ -89,6 +90,7 @@ class App {
 	}
 
 	def static runFPFNAnalysis(ArrayList<Project> projects){
+		logger();
 		restoreGitRepositories(projects)
 		LinkedList<MergeCommit> horizontalExecutionMergeCommits = fillMergeCommitsListForHorizontalExecution(projects)
 		for(int i=0; i<horizontalExecutionMergeCommits.size();i++){
@@ -116,6 +118,60 @@ class App {
 				(new AntBuilder()).delete(dir:revisionFolderDir,failonerror:false)
 			}
 		}
+		
+		println 'FPFN Analysis Finished!'
+		
+	}
+	
+	def static testFPFNAnalysis(){
+		logger();
+		
+		LinkedList<MergeCommit> horizontalExecutionMergeCommits = new LinkedList<MergeCommit>()
+
+		MergeCommit m1  = new MergeCommit()
+		m1.projectName  = "test"
+		m1.revisionFile = "C:\\GGTS\\workspace\\GitCE\\test\\testinfra\\rev1\\rev1.revisions"
+		m1.sha			= "m1sha"
+		
+		MergeCommit m2  = new MergeCommit()
+		m2.projectName  = "test"
+		m2.revisionFile = "C:\\GGTS\\workspace\\GitCE\\test\\testinfra\\rev2\\rev2.revisions"
+		m2.sha			= "m2sha"
+		
+		
+		horizontalExecutionMergeCommits.add(m1)
+		horizontalExecutionMergeCommits.add(m2)
+		
+		for(int i=0; i<horizontalExecutionMergeCommits.size();i++){
+			MergeCommit m = horizontalExecutionMergeCommits.get(i);
+			println ('Analysing ' + ((i+1)+'/'+horizontalExecutionMergeCommits.size()) + ': ' +  m.sha)
+
+			if(m.revisionFile != null){
+				FSTGenMerger merger 	  = new FSTGenMerger()
+				
+				//one MergeResult for MergeCommit
+				MergeResult mergeResult	  = new MergeResult()
+				mergeResult.projectName	  = m.projectName
+				mergeResult.revision	  = m.revisionFile
+
+				FPFNCandidates candidates = merger.runMerger(mergeResult)
+
+				MethodReferencesFinderAST finder = new MethodReferencesFinderAST()
+				finder.run(mergeResult,candidates.renamingCandidates, candidates.importCandidates, candidates.duplicatedCandidates)
+
+				printMergeResult(mergeResult)
+
+				fillExecutionLog(m)
+			}
+		}
+		
+		println 'Test Finished!'
+	}
+
+	def static logger() {
+		FileOutputStream file = new FileOutputStream("console.log");
+		LoggerPrintStream tee = new LoggerPrintStream(file, System.out);
+		System.setOut(tee)
 	}
 	
 	def private static restoreGitRepositories(ArrayList<Project> projects){
@@ -190,12 +246,24 @@ class App {
 		def fpRenamingConf
 		def fnDuplicationMissed
 		def fnImportMissed
+		def fpRenamingConfDup
+		def fpConsLines
+		def fpSpacing
+		def fpConsSpac
+		def fnImportMissedMergeScenarios
+		def fpRenamingConfDupMergeScenarios
+		def fpConsLinesMergeScenarios
+		def fpSpacingMergeScenarios
+		def fpConsSpacMergeScenarios
 
 		//mergeResult.orderingConflicts = mergeResult.linedbasedConfs - (mergeResult.ssmergeConfs - mergeResult.renamingConflictsFromSsmerge)
 		
 		int tssmerge = (mergeResult.ssmergeConfs+mergeResult.importIssuesFromParser+mergeResult.importIssuesFromSsmergePackageMember);
 		mergeResult.orderingConflicts = ((mergeResult.linedbasedConfs - (tssmerge - mergeResult.renamingConflictsFromSsmerge))>0)?(mergeResult.linedbasedConfs - (tssmerge - mergeResult.renamingConflictsFromSsmerge)):0
 		
+		
+		def out = new File('results/resultFPFNAnalysis.csv')
+		if(!out.exists()){out.createNewFile();}
 		new File('results/resultFPFNAnalysis.csv').splitEachLine(' ') {fields ->
 			project = fields[0]
 			if(project == mergeResult.projectName){
@@ -210,13 +278,28 @@ class App {
 				fpRenamingConf 					= fields[9].toInteger()+(mergeResult.renamingConflictsFromSsmerge-mergeResult.renamingConflictsFromParser)
 				fnDuplicationMissed 			= fields[10].toInteger()+mergeResult.duplicationIssuesFromParser
 				fnImportMissed 					= fields[11].toInteger()+(mergeResult.importIssuesFromParser + mergeResult.importIssuesFromSsmergePackageMember)
+				fpRenamingConfDup				= fields[12].toInteger()+mergeResult.renamingConflictsFromSsmergeDueToIdentation
+				fpConsLines						= fields[13].toInteger()+mergeResult.consecutiveLinesConflicts
+				fpSpacing 						= fields[14].toInteger()+mergeResult.spacingConflicts
+				fpConsSpac 						= fields[15].toInteger()+mergeResult.consecutiveLinesAndSpacingConflicts
+				fpRenamingConfDupMergeScenarios	= (mergeResult.renamingConflictsFromSsmergeDueToIdentation>0)?(fields[16].toInteger()+1):fields[16]
+				fpConsLinesMergeScenarios		= (mergeResult.consecutiveLinesConflicts>0)?(fields[17].toInteger()+1):fields[17]
+				fpSpacingMergeScenarios			= (mergeResult.spacingConflicts>0)?(fields[18].toInteger()+1):fields[18]
+				fpConsSpacMergeScenarios		= (mergeResult.consecutiveLinesAndSpacingConflicts>0)?(fields[19].toInteger()+1):fields[19]
+				
+				
 				projectFound = true;
 				def updatedRow = [project,mergeScenarios,
 					fpOrderingMergeScenarios,fpRenamingMergeScenarios,
 					fnDuplicationMergeScenarios,fnImportMergeScenarios,
 					textualConfUnmerge,textualConfSsmerge,
 					fpOrderingConf,fpRenamingConf,
-					fnDuplicationMissed,fnImportMissed]
+					fnDuplicationMissed,fnImportMissed,				
+				    fpRenamingConfDup,fpConsLines,
+				    fpSpacing,fpConsSpac,
+				    fpRenamingConfDupMergeScenarios,fpConsLinesMergeScenarios,
+				    fpSpacingMergeScenarios,fpConsSpacMergeScenarios]
+				
 				rows.add(updatedRow.join(' '))
 			} else {
 				rows.add(fields.join(' '))
@@ -236,22 +319,49 @@ class App {
 			fpRenamingConf 					= (mergeResult.renamingConflictsFromSsmerge-mergeResult.renamingConflictsFromParser)
 			fnDuplicationMissed 			= mergeResult.duplicationIssuesFromParser
 			fnImportMissed 					= mergeResult.importIssuesFromParser + mergeResult.importIssuesFromSsmergePackageMember
+			fpRenamingConfDup				= mergeResult.renamingConflictsFromSsmergeDueToIdentation
+			fpConsLines						= mergeResult.consecutiveLinesConflicts
+			fpSpacing 						= mergeResult.spacingConflicts
+			fpConsSpac 						= mergeResult.consecutiveLinesAndSpacingConflicts
+			fpRenamingConfDupMergeScenarios	= (mergeResult.renamingConflictsFromSsmergeDueToIdentation>0)?1:0
+			fpConsLinesMergeScenarios		= (mergeResult.consecutiveLinesConflicts>0)?1:0
+			fpSpacingMergeScenarios			= (mergeResult.spacingConflicts>0)?1:0
+			fpConsSpacMergeScenarios		= (mergeResult.consecutiveLinesAndSpacingConflicts>0)?1:0
 
 			def newRow = [project,mergeScenarios,
-				fpOrderingMergeScenarios,fpRenamingMergeScenarios,
-				fnDuplicationMergeScenarios,fnImportMergeScenarios,
-				textualConfUnmerge,textualConfSsmerge,
-				fpOrderingConf,fpRenamingConf,
-				fnDuplicationMissed,fnImportMissed]
+					fpOrderingMergeScenarios,fpRenamingMergeScenarios,
+					fnDuplicationMergeScenarios,fnImportMergeScenarios,
+					textualConfUnmerge,textualConfSsmerge,
+					fpOrderingConf,fpRenamingConf,
+					fnDuplicationMissed,fnImportMissed,				
+				    fpRenamingConfDup,fpConsLines,
+				    fpSpacing,fpConsSpac,
+				    fpRenamingConfDupMergeScenarios,fpConsLinesMergeScenarios,
+				    fpSpacingMergeScenarios,fpConsSpacMergeScenarios]
 
 			rows.add(newRow.join(' '))
 		}
 
 		//printing the result file
-		def out = new File('results/resultFPFNAnalysis.csv')
-		// deleting old files if it exists
-		out.delete()
+		if(out.exists()){
+			// deleting old files if it exists
+			out.delete()
+			out.createNewFile();
+		}
 		out = new File('results/resultFPFNAnalysis.csv')
+		def headerRow = ['project','mergeScenarios',
+						'fpOrderingMergeScenarios','fpRenamingMergeScenarios',
+						'fnDuplicationMergeScenarios','fnImportMergeScenarios',
+						'textualConfUnmerge','textualConfSsmerge',
+						'fpOrderingConf','fpRenamingConf',
+						'fnDuplicationMissed','fnImportMissed',				
+					    'fpRenamingConfDup','fpConsLines',
+					    'fpSpacing','fpConsSpac',
+					    'fpRenamingConfDupMergeScenarios','fpConsLinesMergeScenarios',
+					    'fpSpacingMergeScenarios','fpConsSpacMergeScenarios']
+		
+		out.append headerRow.join(' ')
+		out.append '\n'
 		rows.each {
 			out.append it
 			out.append '\n'
@@ -260,23 +370,14 @@ class App {
 		//publishResults()
 	}
 
-	def private static publishResults(){
-		try{
-			def command = "\"C:\\Program Files\\R\\R-3.1.3\\bin\\Rscript.exe\" \"C:\\GGTS\\ggts-bundle\\workspace\\GitCE\\processResultsScript.r\""
-			Runtime run = Runtime.getRuntime()
-			Process pr = run.exec(command)
-			new AntBuilder().copy(todir:"C:\\Users\\Guilherme\\Google Drive\\Pós-Graduação\\Pesquisa\\Outros\\ISQFIEDMA_results", overwrite:true) {fileset(dir:"C:\\GGTS\\ggts-bundle\\workspace\\GitCE\\results\\html" , defaultExcludes: false)}
-			new AntBuilder().copy(file:"C:\\GGTS\\ggts-bundle\\workspace\\GitCE\\results\\html\\resultFPFN.html", todir:"C:\\Users\\Guilherme\\Google Drive\\Pós-Graduação\\Pesquisa\\Outros\\ISQFIEDMA_results", overwrite:true)
-		} catch(Exception e){
-			e.printStackTrace()
-		}
-	}
-
 	public static void main (String[] args){
 		//restoreGitRepositories()
-		ArrayList<Project> projects = readProjects();
-		runFPFNAnalysis(projects)
 		//runWithCommitCsv()
 		//publishResults()
+		
+		//ArrayList<Project> projects = readProjects();
+		//runFPFNAnalysis(projects)
+		
+		testFPFNAnalysis()
 	}
 }

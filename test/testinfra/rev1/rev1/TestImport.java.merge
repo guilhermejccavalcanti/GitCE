@@ -1,0 +1,20 @@
+<<<<<<< C:\GGTS\workspace\GitCE\fstmerge_tmp1450919568919\fstmerge_var1_118886398382519647.java
+import java.awt.List;
+=======
+import java.util.*;
+>>>>>>> C:\GGTS\workspace\GitCE\fstmerge_tmp1450919568919\fstmerge_var2_6634927147035302880.java
+
+public class TestImport {
+	void runList(List list){
+	 for(Object item : list){
+		System.out.println(item);
+	 }
+	}
+	
+	void printNames(List<String> names){
+	 for(String name : names){
+		System.out.println(name);
+	 }
+	}
+}
+
