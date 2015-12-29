@@ -1,0 +1,8 @@
+public class Test{
+	int var;
+	
+	void dupp(){
+		System.out.println("duplication of left");
+	}
+
+}
