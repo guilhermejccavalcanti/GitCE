@@ -118,37 +118,37 @@ class App {
 				(new AntBuilder()).delete(dir:revisionFolderDir,failonerror:false)
 			}
 		}
-		
+
 		println 'FPFN Analysis Finished!'
-		
+
 	}
-	
+
 	def static testFPFNAnalysis(){
 		logger();
-		
+
 		LinkedList<MergeCommit> horizontalExecutionMergeCommits = new LinkedList<MergeCommit>()
 
 		MergeCommit m1  = new MergeCommit()
 		m1.projectName  = "test"
 		m1.revisionFile = "C:\\GGTS\\workspace\\GitCE\\test\\testinfra\\rev1\\rev1.revisions"
 		m1.sha			= "m1sha"
-		
+
 		MergeCommit m2  = new MergeCommit()
 		m2.projectName  = "test"
 		m2.revisionFile = "C:\\GGTS\\workspace\\GitCE\\test\\testinfra\\rev2\\rev2.revisions"
 		m2.sha			= "m2sha"
-		
-		
+
+
 		horizontalExecutionMergeCommits.add(m1)
 		horizontalExecutionMergeCommits.add(m2)
-		
+
 		for(int i=0; i<horizontalExecutionMergeCommits.size();i++){
 			MergeCommit m = horizontalExecutionMergeCommits.get(i);
 			println ('Analysing ' + ((i+1)+'/'+horizontalExecutionMergeCommits.size()) + ': ' +  m.sha)
 
 			if(m.revisionFile != null){
 				FSTGenMerger merger 	  = new FSTGenMerger()
-				
+
 				//one MergeResult for MergeCommit
 				MergeResult mergeResult	  = new MergeResult()
 				mergeResult.projectName	  = m.projectName
@@ -164,7 +164,7 @@ class App {
 				fillExecutionLog(m)
 			}
 		}
-		
+
 		println 'Test Finished!'
 	}
 
@@ -173,7 +173,7 @@ class App {
 		LoggerPrintStream tee = new LoggerPrintStream(file, System.out);
 		System.setOut(tee)
 	}
-	
+
 	def private static restoreGitRepositories(ArrayList<Project> projects){
 		//Read r = new Read("projects.csv")
 		//def projects = r.getProjects()
@@ -255,27 +255,36 @@ class App {
 		def fpConsLinesMergeScenarios
 		def fpSpacingMergeScenarios
 		def fpConsSpacMergeScenarios
+		def fnNewArtRefOldOneMergeScnarios
+		def fnNewArtRefOldOneConf
+
 
 		//mergeResult.orderingConflicts = mergeResult.linedbasedConfs - (mergeResult.ssmergeConfs - mergeResult.renamingConflictsFromSsmerge)
-		
-		int tssmerge = (mergeResult.ssmergeConfs+mergeResult.importIssuesFromParser+mergeResult.importIssuesFromSsmergePackageMember);
-		mergeResult.orderingConflicts = ((mergeResult.linedbasedConfs - (tssmerge - mergeResult.renamingConflictsFromSsmerge))>0)?(mergeResult.linedbasedConfs - (tssmerge - mergeResult.renamingConflictsFromSsmerge)):0
-		
-		
+
+		int fnss    	= mergeResult.importIssuesFromParser + mergeResult.importIssuesFromSsmergePackageMember + mergeResult.newArtefactsReferencingEditedOnes
+		int fpss 		= mergeResult.renamingConflictsFromSsmerge - mergeResult.refToRenamedMethodsFromParser
+		int tssmerge    = (mergeResult.ssmergeConfs + fnss) - fpss
+		int ordConfs 	= mergeResult.linedbasedConfs - tssmerge
+		mergeResult.orderingConflicts = (ordConfs>0)?ordConfs:0
+
+
 		def out = new File('results/resultFPFNAnalysis.csv')
-		if(!out.exists()){out.createNewFile();}
+		if(!out.exists()){
+			out.createNewFile();
+		}
+
 		new File('results/resultFPFNAnalysis.csv').splitEachLine(' ') {fields ->
 			project = fields[0]
 			if(project == mergeResult.projectName){
 				mergeScenarios 					= fields[1].toInteger() + 1
 				fpOrderingMergeScenarios 		= (mergeResult.orderingConflicts>0)?((fields[2]).toInteger()+1):(fields[2])
-				fpRenamingMergeScenarios 		= ((mergeResult.renamingConflictsFromSsmerge-mergeResult.renamingConflictsFromParser)>0)?((fields[3]).toInteger()+1):(fields[3])
+				fpRenamingMergeScenarios 		= ((mergeResult.renamingConflictsFromSsmerge-mergeResult.refToRenamedMethodsFromParser)>0)?((fields[3]).toInteger()+1):(fields[3])
 				fnDuplicationMergeScenarios 	= (mergeResult.duplicationIssuesFromParser>0)?((fields[4]).toInteger()+1):(fields[4])
 				fnImportMergeScenarios 			= ((mergeResult.importIssuesFromParser + mergeResult.importIssuesFromSsmergePackageMember)>0)?((fields[5]).toInteger()+1):(fields[5])
 				textualConfUnmerge				= fields[6].toInteger()+mergeResult.linedbasedConfs
 				textualConfSsmerge				= fields[7].toInteger()+mergeResult.ssmergeConfs
 				fpOrderingConf 					= fields[8].toInteger()+mergeResult.orderingConflicts
-				fpRenamingConf 					= fields[9].toInteger()+(mergeResult.renamingConflictsFromSsmerge-mergeResult.renamingConflictsFromParser)
+				fpRenamingConf 					= fields[9].toInteger()+(mergeResult.renamingConflictsFromSsmerge-mergeResult.refToRenamedMethodsFromParser)
 				fnDuplicationMissed 			= fields[10].toInteger()+mergeResult.duplicationIssuesFromParser
 				fnImportMissed 					= fields[11].toInteger()+(mergeResult.importIssuesFromParser + mergeResult.importIssuesFromSsmergePackageMember)
 				fpRenamingConfDup				= fields[12].toInteger()+mergeResult.renamingConflictsFromSsmergeDueToIdentation
@@ -286,20 +295,23 @@ class App {
 				fpConsLinesMergeScenarios		= (mergeResult.consecutiveLinesConflicts>0)?(fields[17].toInteger()+1):fields[17]
 				fpSpacingMergeScenarios			= (mergeResult.spacingConflicts>0)?(fields[18].toInteger()+1):fields[18]
 				fpConsSpacMergeScenarios		= (mergeResult.consecutiveLinesAndSpacingConflicts>0)?(fields[19].toInteger()+1):fields[19]
-				
-				
+				fnNewArtRefOldOneMergeScnarios  = (mergeResult.newArtefactsReferencingEditedOnes>0)?(fields[20].toInteger()+1):fields[20]
+				fnNewArtRefOldOneConf			= fields[21].toInteger()+mergeResult.newArtefactsReferencingEditedOnes
+
+
 				projectFound = true;
 				def updatedRow = [project,mergeScenarios,
 					fpOrderingMergeScenarios,fpRenamingMergeScenarios,
 					fnDuplicationMergeScenarios,fnImportMergeScenarios,
 					textualConfUnmerge,textualConfSsmerge,
 					fpOrderingConf,fpRenamingConf,
-					fnDuplicationMissed,fnImportMissed,				
-				    fpRenamingConfDup,fpConsLines,
-				    fpSpacing,fpConsSpac,
-				    fpRenamingConfDupMergeScenarios,fpConsLinesMergeScenarios,
-				    fpSpacingMergeScenarios,fpConsSpacMergeScenarios]
-				
+					fnDuplicationMissed,fnImportMissed,
+					fpRenamingConfDup,fpConsLines,
+					fpSpacing,fpConsSpac,
+					fpRenamingConfDupMergeScenarios,fpConsLinesMergeScenarios,
+					fpSpacingMergeScenarios,fpConsSpacMergeScenarios,
+					fnNewArtRefOldOneMergeScnarios,fnNewArtRefOldOneConf]
+
 				rows.add(updatedRow.join(' '))
 			} else {
 				rows.add(fields.join(' '))
@@ -310,13 +322,13 @@ class App {
 			project 						= mergeResult.projectName
 			mergeScenarios 					= 1
 			fpOrderingMergeScenarios 		= (mergeResult.orderingConflicts>0)?1:0
-			fpRenamingMergeScenarios 		= ((mergeResult.renamingConflictsFromSsmerge-mergeResult.renamingConflictsFromParser)>0)?1:0
+			fpRenamingMergeScenarios 		= ((mergeResult.renamingConflictsFromSsmerge-mergeResult.refToRenamedMethodsFromParser)>0)?1:0
 			fnDuplicationMergeScenarios 	= (mergeResult.duplicationIssuesFromParser>0)?1:0
 			fnImportMergeScenarios 			= ((mergeResult.importIssuesFromParser + mergeResult.importIssuesFromSsmergePackageMember)>0)?1:0
 			textualConfSsmerge				= mergeResult.ssmergeConfs
 			textualConfUnmerge				= mergeResult.linedbasedConfs
 			fpOrderingConf 					= mergeResult.orderingConflicts
-			fpRenamingConf 					= (mergeResult.renamingConflictsFromSsmerge-mergeResult.renamingConflictsFromParser)
+			fpRenamingConf 					= (mergeResult.renamingConflictsFromSsmerge-mergeResult.refToRenamedMethodsFromParser)
 			fnDuplicationMissed 			= mergeResult.duplicationIssuesFromParser
 			fnImportMissed 					= mergeResult.importIssuesFromParser + mergeResult.importIssuesFromSsmergePackageMember
 			fpRenamingConfDup				= mergeResult.renamingConflictsFromSsmergeDueToIdentation
@@ -327,17 +339,20 @@ class App {
 			fpConsLinesMergeScenarios		= (mergeResult.consecutiveLinesConflicts>0)?1:0
 			fpSpacingMergeScenarios			= (mergeResult.spacingConflicts>0)?1:0
 			fpConsSpacMergeScenarios		= (mergeResult.consecutiveLinesAndSpacingConflicts>0)?1:0
+			fnNewArtRefOldOneMergeScnarios  = (mergeResult.newArtefactsReferencingEditedOnes>0)?1:0
+			fnNewArtRefOldOneConf			= mergeResult.newArtefactsReferencingEditedOnes
 
 			def newRow = [project,mergeScenarios,
-					fpOrderingMergeScenarios,fpRenamingMergeScenarios,
-					fnDuplicationMergeScenarios,fnImportMergeScenarios,
-					textualConfUnmerge,textualConfSsmerge,
-					fpOrderingConf,fpRenamingConf,
-					fnDuplicationMissed,fnImportMissed,				
-				    fpRenamingConfDup,fpConsLines,
-				    fpSpacing,fpConsSpac,
-				    fpRenamingConfDupMergeScenarios,fpConsLinesMergeScenarios,
-				    fpSpacingMergeScenarios,fpConsSpacMergeScenarios]
+				fpOrderingMergeScenarios,fpRenamingMergeScenarios,
+				fnDuplicationMergeScenarios,fnImportMergeScenarios,
+				textualConfUnmerge,textualConfSsmerge,
+				fpOrderingConf,fpRenamingConf,
+				fnDuplicationMissed,fnImportMissed,
+				fpRenamingConfDup,fpConsLines,
+				fpSpacing,fpConsSpac,
+				fpRenamingConfDupMergeScenarios,fpConsLinesMergeScenarios,
+				fpSpacingMergeScenarios,fpConsSpacMergeScenarios,
+				fnNewArtRefOldOneMergeScnarios,fnNewArtRefOldOneConf]
 
 			rows.add(newRow.join(' '))
 		}
@@ -347,21 +362,23 @@ class App {
 			// deleting old files if it exists
 			out.delete()
 			out.createNewFile();
+
+			//			def headerRow = ['project','mergeScenarios',
+			//				'fpOrderingMergeScenarios','fpRenamingMergeScenarios',
+			//				'fnDuplicationMergeScenarios','fnImportMergeScenarios',
+			//				'textualConfUnmerge','textualConfSsmerge',
+			//				'fpOrderingConf','fpRenamingConf',
+			//				'fnDuplicationMissed','fnImportMissed',
+			//				'fpRenamingConfDup','fpConsLines',
+			//				'fpSpacing','fpConsSpac',
+			//				'fpRenamingConfDupMergeScenarios','fpConsLinesMergeScenarios',
+			//				'fpSpacingMergeScenarios','fpConsSpacMergeScenarios',
+			//				'fnNewArtRefOldOneMergeScnarios','fnNewArtRefOldOneConf']
+			//			out.append headerRow.join(' ')
+			//			out.append '\n'
 		}
 		out = new File('results/resultFPFNAnalysis.csv')
-		def headerRow = ['project','mergeScenarios',
-						'fpOrderingMergeScenarios','fpRenamingMergeScenarios',
-						'fnDuplicationMergeScenarios','fnImportMergeScenarios',
-						'textualConfUnmerge','textualConfSsmerge',
-						'fpOrderingConf','fpRenamingConf',
-						'fnDuplicationMissed','fnImportMissed',				
-					    'fpRenamingConfDup','fpConsLines',
-					    'fpSpacing','fpConsSpac',
-					    'fpRenamingConfDupMergeScenarios','fpConsLinesMergeScenarios',
-					    'fpSpacingMergeScenarios','fpConsSpacMergeScenarios']
-		
-		out.append headerRow.join(' ')
-		out.append '\n'
+
 		rows.each {
 			out.append it
 			out.append '\n'
@@ -374,10 +391,10 @@ class App {
 		//restoreGitRepositories()
 		//runWithCommitCsv()
 		//publishResults()
-		
+
 		//ArrayList<Project> projects = readProjects();
 		//runFPFNAnalysis(projects)
-		
+
 		testFPFNAnalysis()
 	}
 }

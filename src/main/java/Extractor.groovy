@@ -629,10 +629,11 @@ class Extractor {
 
 	def private boolean canCopy(String fileName){
 		boolean can = false
-		if(fileName.equalsIgnoreCase("java") || fileName.equalsIgnoreCase("py") || fileName.equalsIgnoreCase("cs")){
-			can = true
-		}
-		return can
+		//		if(fileName.equalsIgnoreCase("java") || fileName.equalsIgnoreCase("py") || fileName.equalsIgnoreCase("cs")){
+		//			can = true
+		//		}
+		//return can
+		return true
 	}
 
 	def private deleteFiles(String dir){
