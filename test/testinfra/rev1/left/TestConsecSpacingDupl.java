@@ -10,6 +10,10 @@ public class TestConsecSpacingDupl{
 		int b;
 	}
 	
+	void testSpace(){
+			int vr;
+	}
+	
 	void m(){
 		System.out.println("Do something...");
 	}

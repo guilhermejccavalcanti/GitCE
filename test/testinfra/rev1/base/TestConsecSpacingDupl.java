@@ -10,4 +10,8 @@ public class TestConsecSpacingDupl{
 		int b;
 	}
 	
+	void testSpace(){
+		int vr;
+	}
+	
 }

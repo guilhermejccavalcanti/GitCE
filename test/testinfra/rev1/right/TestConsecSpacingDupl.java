@@ -10,6 +10,10 @@ public class TestConsecSpacingDupl{
 		int b1;
 	}
 	
+	void testSpace(){
+		int vr = 15;
+	}
+	
 	void testConsecAndSpace(){
 			int a;
 			int b1;
