@@ -18,7 +18,6 @@ cxf,https://github.com/apache/cxf,/home/ines/gjcc/fpfnanalysis/gitminerdbs/graph
 dropwizard,https://github.com/dropwizard/dropwizard,/home/ines/gjcc/fpfnanalysis/gitminerdbs/graph_dropwizard.db
 Equivalent-Exchange-3,https://github.com/pahimar/Equivalent-Exchange-3,/home/ines/gjcc/fpfnanalysis/gitminerdbs/graph_EquivalentExchange3.db
 Essentials,https://github.com/essentials/Essentials,/home/ines/gjcc/fpfnanalysis/gitminerdbs/graph_Essentials.db
-FBReaderJ,https://github.com/geometer/FBReaderJ,/home/ines/gjcc/fpfnanalysis/gitminerdbs/graph_FBReaderJ
 gradle,https://github.com/gradle/gradle,/home/ines/gjcc/fpfnanalysis/gitminerdbs/graph_gradle.db
 graylog2-server,https://github.com/Graylog2/graylog2-server,/home/ines/gjcc/fpfnanalysis/gitminerdbs/graph_graylog2server.db
 groovy-core,https://github.com/groovy/groovy-core,/home/ines/gjcc/fpfnanalysis/gitminerdbs/graph_groovycore.db
@@ -43,9 +42,10 @@ Osmand,https://github.com/osmandapp/Osmand,/home/ines/gjcc/fpfnanalysis/gitminer
 realm-java,https://github.com/realm/realm-java,/home/ines/gjcc/fpfnanalysis/gitminerdbs/graph_realm.db
 retrofit,https://github.com/square/retrofit,/home/ines/gjcc/fpfnanalysis/gitminerdbs/graph_retrofit.db
 roboguice,https://github.com/roboguice/roboguice,/home/ines/gjcc/fpfnanalysis/gitminerdbs/graph_roboguice.db
-robolectric,https://github.com/robolectric/robolectric,/home/ines/gjcc/fpfnanalysis/gitminerdbs/graph_roboletric.db
 rstudio,https://github.com/rstudio/rstudio,/home/ines/gjcc/fpfnanalysis/gitminerdbs/graph_rstudio.db
 rundeck,https://github.com/rundeck/rundeck,/home/ines/gjcc/fpfnanalysis/gitminerdbs/graph_rundeck.db
 RxJava,https://github.com/ReactiveX/RxJava,/home/ines/gjcc/fpfnanalysis/gitminerdbs/graph_rxjava.db
 Spout,https://github.com/SpoutDev/Spout,/home/ines/gjcc/fpfnanalysis/gitminerdbs/graph_Spout.db
 voldemort,https://github.com/voldemort/voldemort,/home/ines/gjcc/fpfnanalysis/gitminerdbs/graph_voldemort.db
+Conversations,https://github.com/siacs/Conversations,/home/ines/gjcc/fpfnanalysis/gitminerdbs/graph_Conversations.db
+deeplearning4j,https://github.com/deeplearning4j/deeplearning4j,/home/ines/gjcc/fpfnanalysis/gitminerdbs/graph_deeplearning4j.db

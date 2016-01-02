@@ -22,12 +22,12 @@ class Printer {
 		}
 	}
 
-	public void writeNumberOfMergeCommits(ArrayList<MergeCommit> listMC){
+	public void writeNumberOfMergeCommits(String name, ArrayList<MergeCommit> listMC){
 		def out = new File('log_number_of_mergecommits.csv')
-		if(!listMC.isEmpty()){
-			def row = [listMC.get(0).projectName,listMC.size()]
+		//if(!listMC.isEmpty()){
+			def row = [name,listMC.size()]
 			out.append row.join(',')
 			out.append '\n'
-		}
+		//}
 	}
 }

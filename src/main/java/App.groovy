@@ -60,6 +60,7 @@ class App {
 
 			Printer p = new Printer()
 			p.writeCSV(gq.getMergeCommitsList())
+			p.writeNumberOfMergeCommits(it.name,gq.getMergeCommitsList());
 			println('Printer Finished!')
 			println("----------------------")
 
@@ -130,12 +131,12 @@ class App {
 
 		MergeCommit m1  = new MergeCommit()
 		m1.projectName  = "test"
-		m1.revisionFile = "C:\\GGTS\\workspace\\GitCE\\test\\testinfra\\rev1\\rev1.revisions"
+		m1.revisionFile = "/home/ines/Downloads/ggts-bundle/workspace_gjcc/GitCE/test/testinfra/nonjava/nonjava.revisions"
 		m1.sha			= "m1sha"
 
 		MergeCommit m2  = new MergeCommit()
 		m2.projectName  = "test"
-		m2.revisionFile = "C:\\GGTS\\workspace\\GitCE\\test\\testinfra\\rev2\\rev2.revisions"
+		m2.revisionFile = "/home/ines/Downloads/ggts-bundle/workspace_gjcc/GitCE/test/testinfra/rev2/rev2.revisions"
 		m2.sha			= "m2sha"
 
 
@@ -396,5 +397,6 @@ class App {
 		//runFPFNAnalysis(projects)
 
 		testFPFNAnalysis()
+		//collectMergeCommits()
 	}
 }
