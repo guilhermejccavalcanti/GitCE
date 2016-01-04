@@ -91,7 +91,7 @@ class App {
 	}
 
 	def static runFPFNAnalysis(ArrayList<Project> projects){
-		logger();
+		//logger();
 		restoreGitRepositories(projects)
 		LinkedList<MergeCommit> horizontalExecutionMergeCommits = fillMergeCommitsListForHorizontalExecution(projects)
 		for(int i=0; i<horizontalExecutionMergeCommits.size();i++){
@@ -251,7 +251,6 @@ class App {
 		def fpConsLines
 		def fpSpacing
 		def fpConsSpac
-		def fnImportMissedMergeScenarios
 		def fpRenamingConfDupMergeScenarios
 		def fpConsLinesMergeScenarios
 		def fpSpacingMergeScenarios
@@ -393,10 +392,10 @@ class App {
 		//runWithCommitCsv()
 		//publishResults()
 
-		//ArrayList<Project> projects = readProjects();
-		//runFPFNAnalysis(projects)
+		ArrayList<Project> projects = readProjects();
+		runFPFNAnalysis(projects)
 
-		testFPFNAnalysis()
+		//testFPFNAnalysis()
 		//collectMergeCommits()
 	}
 }

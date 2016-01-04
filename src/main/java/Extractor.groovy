@@ -50,7 +50,7 @@ class Extractor {
 		this.project			= project
 		this.listMergeCommit 	= this.project.listMergeCommit
 		this.remoteUrl 			= this.project.url
-		this.projectsDirectory	= "E:/Mestrado/FPFNAnalysis/projects/"
+		this.projectsDirectory	= "/home/ines/gjcc/fpfnanalysis/projects/"
 		this.tempdir			= this.projectsDirectory + "temp/" +this.project.name+"/git"
 		this.repositoryDir		= this.projectsDirectory + this.project.name + "/git"
 		this.CONFLICTS 			= 0
@@ -60,7 +60,7 @@ class Extractor {
 
 	public Extractor(MergeCommit mergeCommit){
 		this.remoteUrl 			= mergeCommit.projectURL
-		this.projectsDirectory	= "E:/Mestrado/FPFNAnalysis/projects/"
+		this.projectsDirectory	= "/home/ines/gjcc/fpfnanalysis/projects/"
 		this.tempdir			= this.projectsDirectory + "temp/" + mergeCommit.projectName +"/git"
 		this.repositoryDir		= this.projectsDirectory + mergeCommit.projectName + "/git"
 		this.CONFLICTS 			= 0
@@ -264,7 +264,7 @@ class Extractor {
 			def destinationDir = allRevFolder + "/rev_left_" + mergeCommit.parent1.substring(0, 5)
 			this.copyFiles(this.repositoryDir, destinationDir, "")
 			def rec = new RecursiveFileList()
-			rec.removeFiles(new File(destinationDir))
+			//rec.removeFiles(new File(destinationDir))
 
 			// git clean -f
 			CleanCommand cleanCommandgit = this.git.clean()
@@ -276,7 +276,7 @@ class Extractor {
 			destinationDir = allRevFolder + "/rev_right_" + mergeCommit.parent2.substring(0, 5)
 			def excludeDir = "**/" + allRevFolder + "/**"
 			this.copyFiles(this.repositoryDir, destinationDir, excludeDir)
-			rec.removeFiles(new File(destinationDir))
+			//rec.removeFiles(new File(destinationDir))
 
 
 			cleanCommandgit = this.git.clean()
@@ -292,7 +292,7 @@ class Extractor {
 			destinationDir = allRevFolder + "/rev_base_" + mergeCommit.ancestor.substring(0, 5)
 			excludeDir	   = "**/" + allRevFolder + "/**"
 			this.copyFiles(this.repositoryDir, destinationDir, excludeDir)
-			rec.removeFiles(new File(destinationDir))
+			//rec.removeFiles(new File(destinationDir))
 
 			def revisionFile 		 = this.writeRevisionsFile(mergeCommit.parent1.substring(0, 5), mergeCommit.parent2.substring(0, 5), mergeCommit.ancestor.substring(0, 5), allRevFolder)
 			mergeCommit.revisionFile = revisionFile
@@ -756,7 +756,7 @@ class Extractor {
 		//new AntBuilder().copy(todir:"C:/GGTS/ggts-bundle/workspace/others/git clones bkp") {fileset(dir:"C:/GGTS/ggts-bundle/workspace/others/git clones" , defaultExcludes: false){}}
 		//new AntBuilder().copy(todir:"C:/Vbox/examples_esem") {fileset(dir:"C:/Vbox/FSTMerge/examples" , defaultExcludes: false){}}}
 		//new AntBuilder().zip(destfile: "C:\\Users\\Guilherme\\.m2.zip", basedir: "C:\\Users\\Guilherme\\.m2")
-		new AntBuilder().copy(todir:"C:\\fpfnsamplebkp") {fileset(dir:"C:\\fpfnsample" , defaultExcludes: false){}}}
+		new AntBuilder().copy(todir:"/home/ines/gjcc/fpfnanalysis/samplerpl") {fileset(dir:"/home/ines/gjcc/fpfnanalysis/samplerpl_bkp" , defaultExcludes: false){}}}
 
 		//		String memberName = "first";
 		//		String s = "return first() + familyName;"
