@@ -101,6 +101,8 @@ class App {
 			Extractor ext = new Extractor(m)
 			ext.downloadMergeScenario(m)
 			if(m.revisionFile != null){
+				fillExecutionLog(m)
+				
 				FSTGenMerger merger 	  = new FSTGenMerger()
 
 				MergeResult mergeResult	  = new MergeResult()
@@ -114,7 +116,6 @@ class App {
 
 				printMergeResult(mergeResult)
 
-				fillExecutionLog(m)
 				String revisionFolderDir = (new File(m.revisionFile)).getParent()
 				(new AntBuilder()).delete(dir:revisionFolderDir,failonerror:false)
 			}
