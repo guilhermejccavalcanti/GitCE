@@ -1,0 +1,32 @@
+public class Test{
+	
+<<<<<<< /home/ines/Downloads/ggts-bundle/workspace_gjcc/GitCE/fstmerge_tmp1453471565237/fstmerge_var1_5447185029737517353.java
+	void n(){
+		System.out.println("n from left");
+	}
+	
+	int var;
+	
+	private class Iner {
+		void d(){
+			System.out.println("Do something");
+		}
+=======
+	private class Iner {
+		void d(){
+			System.out.println("Do oosomething");
+		}
+	}
+	
+	int var;
+	
+	void e(){
+		System.out.println("e from right");
+	}
+	
+	void n(){
+		System.out.println("n from right");
+>>>>>>> /home/ines/Downloads/ggts-bundle/workspace_gjcc/GitCE/fstmerge_tmp1453471565237/fstmerge_var2_8310699140305183119.java
+	}
+}
+

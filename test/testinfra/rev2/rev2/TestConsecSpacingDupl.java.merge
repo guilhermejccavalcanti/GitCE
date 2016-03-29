@@ -1,0 +1,32 @@
+public class TestConsecSpacingDupl{
+	
+	void m(){
+		System.out.println("Do another thing...");
+		System.out.println(new TestRenaming().fullName());
+	}
+	
+	void testConsec(){
+<<<<<<< /home/ines/Downloads/ggts-bundle/workspace_gjcc/GitCE/fstmerge_tmp1453471565511/fstmerge_var1_2290567816262000762.java
+		int a1;
+		int b;
+=======
+		int a;
+		int b1;
+>>>>>>> /home/ines/Downloads/ggts-bundle/workspace_gjcc/GitCE/fstmerge_tmp1453471565511/fstmerge_var2_1765113086246142173.java
+	}
+	
+	void testConsecAndSpace(){
+<<<<<<< /home/ines/Downloads/ggts-bundle/workspace_gjcc/GitCE/fstmerge_tmp1453471565511/fstmerge_var1_2290567816262000762.java
+		int a1;
+		int b;
+=======
+			int a;
+			int b1;
+>>>>>>> /home/ines/Downloads/ggts-bundle/workspace_gjcc/GitCE/fstmerge_tmp1453471565511/fstmerge_var2_1765113086246142173.java
+	}
+	
+	void m(){
+		System.out.println("Do something...");
+	}
+}
+

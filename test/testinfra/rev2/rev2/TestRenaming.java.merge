@@ -1,0 +1,24 @@
+public class TestRenaming{
+<<<<<<< /home/ines/Downloads/ggts-bundle/workspace_gjcc/GitCE/fstmerge_tmp1453471565515/fstmerge_var1_1038494696522809712.java
+	void givenName(String name){
+		System.out.println(name);
+=======
+	void givenName(){
+		System.out.println("Guilherme");
+>>>>>>> /home/ines/Downloads/ggts-bundle/workspace_gjcc/GitCE/fstmerge_tmp1453471565515/fstmerge_var2_4642142571037519218.java
+	}
+	
+<<<<<<< /home/ines/Downloads/ggts-bundle/workspace_gjcc/GitCE/fstmerge_tmp1453471565515/fstmerge_var1_1038494696522809712.java
+	void doMath(int a, int b, int c){
+		return a+b+c;
+=======
+	void doMath(int a, int b){
+		return a	+	b;
+	}
+	
+	public void fullName(){
+		System.out.println(givenName() + "Cavalcanti");
+>>>>>>> /home/ines/Downloads/ggts-bundle/workspace_gjcc/GitCE/fstmerge_tmp1453471565515/fstmerge_var2_4642142571037519218.java
+	}
+}
+

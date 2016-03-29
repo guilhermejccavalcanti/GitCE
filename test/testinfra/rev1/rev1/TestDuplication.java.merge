@@ -1,0 +1,34 @@
+public class Test{
+	int var;
+<<<<<<< /home/ines/Downloads/ggts-bundle/workspace_gjcc/GitCE/fstmerge_tmp1451749062251/fstmerge_var1_4471399427887374860.java
+	
+	int a = 15;
+	int b;
+	 
+	void dupp(){
+		System.out.println("duplication of left");
+	}
+	
+	 private class Inner {
+		 void m(){
+			System.out.println("inner of left");
+		 }
+	 }
+
+=======
+	
+	void dupp(){
+		System.out.println("duplication of right");
+	}
+	
+	 private class Inner {
+		 void m(){
+			System.out.println("inner of right");
+		 }
+	 }
+	 
+	 int a = 10;
+	 int b;
+>>>>>>> /home/ines/Downloads/ggts-bundle/workspace_gjcc/GitCE/fstmerge_tmp1451749062251/fstmerge_var2_4559890007547737151.java
+}
+

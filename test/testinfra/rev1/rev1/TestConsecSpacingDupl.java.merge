@@ -1,0 +1,42 @@
+public class TestConsecSpacingDupl{
+	
+	void m(){
+		System.out.println("Do another thing...");
+		System.out.println(new TestRenaming().givenName());
+}
+	
+	void testConsec(){
+<<<<<<< /home/ines/Downloads/ggts-bundle/workspace_gjcc/GitCE/fstmerge_tmp1451749062232/fstmerge_var1_5940934183292919624.java
+		int a1;
+		int b;
+=======
+		int a;
+		int b1;
+>>>>>>> /home/ines/Downloads/ggts-bundle/workspace_gjcc/GitCE/fstmerge_tmp1451749062232/fstmerge_var2_7718794271320327203.java
+	}
+	
+<<<<<<< /home/ines/Downloads/ggts-bundle/workspace_gjcc/GitCE/fstmerge_tmp1451749062232/fstmerge_var1_5940934183292919624.java
+	void testConsecAndSpace(){
+		int a1;
+		int b;
+=======
+	void testSpace(){
+		int vr = 15;
+>>>>>>> /home/ines/Downloads/ggts-bundle/workspace_gjcc/GitCE/fstmerge_tmp1451749062232/fstmerge_var2_7718794271320327203.java
+	}
+	
+<<<<<<< /home/ines/Downloads/ggts-bundle/workspace_gjcc/GitCE/fstmerge_tmp1451749062232/fstmerge_var1_5940934183292919624.java
+	void testSpace(){
+			int vr;
+=======
+	void testConsecAndSpace(){
+			int a;
+			int b1;
+>>>>>>> /home/ines/Downloads/ggts-bundle/workspace_gjcc/GitCE/fstmerge_tmp1451749062232/fstmerge_var2_7718794271320327203.java
+	}
+	
+	void m(){
+		System.out.println("Do something...");
+	}
+}
+

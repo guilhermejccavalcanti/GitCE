@@ -1,0 +1,9 @@
+class Test{
+<<<<<<< /home/ines/Downloads/ggts-bundle/workspace_gjcc/GitCE/fstmerge_tmp1453471565506/fstmerge_var1_309754243928812735.java
+		int c = 10;
+=======
+	int c;
+	int b = c + 10;
+>>>>>>> /home/ines/Downloads/ggts-bundle/workspace_gjcc/GitCE/fstmerge_tmp1453471565506/fstmerge_var2_1985636092191735738.java
+}
+
